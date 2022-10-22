@@ -27,10 +27,26 @@ public class ImgCollection {
     public Image breakalbeWallImg = breakalbeWall.getFxImage();
 
     /**
-     * Bomber.
+     * Player.
      */
     public static Sprite bomber = new Sprite(DEFAULT_SIZE, 1, 3, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
     public Image bomberImg = bomber.getFxImage();
+
+    public static Sprite player_up_1 = new Sprite(DEFAULT_SIZE, 1, 1, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+    public static Sprite player_up_2 = new Sprite(DEFAULT_SIZE, 2, 1, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+    public static Sprite player_up_3 = new Sprite(DEFAULT_SIZE, 3, 1, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+
+    public static Sprite player_down_1 = new Sprite(DEFAULT_SIZE, 1, 3, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+    public static Sprite player_down_2 = new Sprite(DEFAULT_SIZE, 2, 3, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+    public static Sprite player_down_3 = new Sprite(DEFAULT_SIZE, 3, 3, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+
+    public static Sprite player_left_1 = new Sprite(DEFAULT_SIZE, 1, 4, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+    public static Sprite player_left_2 = new Sprite(DEFAULT_SIZE, 2, 4, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+    public static Sprite player_left_3 = new Sprite(DEFAULT_SIZE, 3, 4, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+
+    public static Sprite player_right_1 = new Sprite(DEFAULT_SIZE, 1, 2, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+    public static Sprite player_right_2 = new Sprite(DEFAULT_SIZE, 2, 2, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
+    public static Sprite player_right_3 = new Sprite(DEFAULT_SIZE, 3, 2, spriteSheet, DEFAULT_SIZE, DEFAULT_SIZE);
 
     public ImgCollection(SpriteSheet spriteSheet) {
         this.spriteSheet = spriteSheet;

@@ -5,18 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e5ca4ca-7fdf-4894-a0c6-1f243cc50594" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/Bomber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/Board.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../OOP/.idea/OOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/BombermanMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/BombermanMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/BreakableWall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/BreakableWall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/Grass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/Grass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/UnbreakableWall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/UnbreakableWall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/Wall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/characters/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/characters/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/characters/player/Bomber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/characters/player/Bomber.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/graphics/ImgCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/graphics/ImgCollection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/map/map1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/map/map1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/map/map3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/map/map3.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +84,7 @@
       <workItem from="1666337671209" duration="11990000" />
       <workItem from="1666401728879" duration="2643000" />
       <workItem from="1666404421760" duration="5781000" />
-      <workItem from="1666436042685" duration="5186000" />
+      <workItem from="1666436042685" duration="15264000" />
     </task>
     <servers />
   </component>

@@ -1,9 +1,11 @@
 package bomberman.btl;
 
+import bomberman.btl.entities.characters.player.Bomber;
 import bomberman.btl.entities.objects.BreakableWall;
 import bomberman.btl.entities.objects.Grass;
 import bomberman.btl.entities.objects.UnbreakableWall;
 import bomberman.btl.graphics.ImgCollection;
+import bomberman.btl.graphics.Sprite;
 import bomberman.btl.graphics.SpriteSheet;
 import bomberman.btl.entities.*;
 
@@ -32,6 +34,9 @@ public class BombermanMain extends Application {
     public static final int WIDTH = 21;
     public static final int HEIGHT = 11;
 
+    public static int x = 2;
+    public static int y = 2;
+
     public SpriteSheet spriteSheet = new SpriteSheet("/img/classic.png", 256);
 
     public ImgCollection imgCollection = new ImgCollection(spriteSheet);
@@ -44,10 +49,14 @@ public class BombermanMain extends Application {
 
     public List<Entity> entities = new ArrayList<>();
 
+    public Bomber player = new Bomber(2, 2);
+
     public Canvas canvas;
     public GraphicsContext graphicsContext;
 
     public Scene scene;
+
+    public Board board;
 
     public static void main(String[] args) {
         launch(args);
@@ -64,6 +73,8 @@ public class BombermanMain extends Application {
                 int stringLength = data.length();
                 for (int col = 0; col < stringLength; ++col) {
                     Entity object;
+                    //System.out.println((row-1) + " " + col + " : " + data.charAt(col));
+                    board.map[row-1][col] = data.charAt(col);
                     if (data.charAt(col) == '#') {
                         object = new UnbreakableWall(row, col + 1);
                         stillObject.add(object);
@@ -83,6 +94,13 @@ public class BombermanMain extends Application {
         }
     }
 
+    public boolean checkMove(int row, int col, Board board) {
+        if (row <= 1 || row >= HEIGHT || col <= 1 || col >= WIDTH) return false;
+        char tmp = board.map[row-1][col-1];
+        if (tmp == '#' || tmp == '*') return false;
+        return true;
+    }
+
     public void update() {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -98,19 +116,37 @@ public class BombermanMain extends Application {
                         break;
                     case LEFT:
                         System.out.println("LEFT");
+                        left();
                         break;
                     case RIGHT:
                         System.out.println("RIGHT");
+                        right();
                         break;
                 }
             }
 
             public void up() {
-
+                if (checkMove(x-1, y, board) == false)  return;
+                player.update(1, x, y, board);
+                x--;
             }
 
             public void down() {
+                if (checkMove(x+1, y, board) == false)  return;
+                player.update(2, x, y, board);
+                if (x < HEIGHT) x++;
+            }
 
+            public void left() {
+                if (checkMove(x, y-1, board) == false)  return;
+                player.update(3, x, y, board);
+                if (y > 1)  y--;
+            }
+
+            public void right() {
+                if (checkMove(x, y+1, board) == false)  return;
+                player.update(4, x, y, board);
+                if (y < WIDTH) y++;
             }
         });
     }
@@ -120,6 +156,7 @@ public class BombermanMain extends Application {
         canvas.setWidth(WIDTH * SCALED_SIZE);
         canvas.setHeight(HEIGHT * SCALED_SIZE);
         graphicsContext = canvas.getGraphicsContext2D();
+        board = new Board(WIDTH, HEIGHT, graphicsContext);
 
         list.add(canvas);
 
@@ -130,7 +167,7 @@ public class BombermanMain extends Application {
         AnimationTimer timer = new RenderImg();
         timer.start();
         createMap();
-        entities.add(new Bomber(2, 2));
+        entities.add(player);
 
         update();
     }
