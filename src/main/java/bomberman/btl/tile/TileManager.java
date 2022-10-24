@@ -8,15 +8,17 @@ import java.io.*;
 import java.util.Scanner;
 
 public class TileManager {
-    GamePanel gamePanel;
-    Tile[] tile;
+    public GamePanel gamePanel;
+    public Tile[] tile;
 
-    char[][] mapTile;
+    public char[][] mapTile;
+    public int[][] mapTileNum;
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         tile = new Tile[10];
         mapTile = new char[gamePanel.maxScreenRow][gamePanel.maxScreenCol];
+        mapTileNum = new int[gamePanel.maxScreenRow][gamePanel.maxScreenCol];
         getTileImage();
         loadMap();
     }
@@ -28,9 +30,11 @@ public class TileManager {
 
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/img/wall.png"));
+            tile[1].collision = true;
 
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/img/brick.png"));
+            tile[2].collision = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,6 +49,17 @@ public class TileManager {
                 String data = myReader.nextLine();
                 for (int col = 0; col < gamePanel.maxScreenCol; ++col) {
                     mapTile[row][col] = data.charAt(col);
+                    switch (mapTile[row][col]) {
+                        case '#':
+                            mapTileNum[row][col] = 1;
+                            break;
+                        case '.':
+                            mapTileNum[row][col] = 0;
+                            break;
+                        case '*':
+                            mapTileNum[row][col] = 2;
+                            break;
+                    }
                 }
                 row++;
             }
@@ -59,15 +74,7 @@ public class TileManager {
             for (int col = 0; col < gamePanel.maxScreenCol; ++col) {
                 int x = col * gamePanel.tileSize;
                 int y = row * gamePanel.tileSize;
-                if (mapTile[row][col] == '#'){
-                    graphics2D.drawImage(tile[1].image,x,y,gamePanel.tileSize, gamePanel.tileSize, null);
-                }
-                if (mapTile[row][col] == '.'){
-                    graphics2D.drawImage(tile[0].image,x,y,gamePanel.tileSize, gamePanel.tileSize, null);
-                }
-                if (mapTile[row][col] == '*'){
-                    graphics2D.drawImage(tile[2].image,x,y,gamePanel.tileSize, gamePanel.tileSize, null);
-                }
+                graphics2D.drawImage(tile[mapTileNum[row][col]].image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
             }
         }
 

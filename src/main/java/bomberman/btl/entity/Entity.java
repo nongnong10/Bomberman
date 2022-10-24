@@ -7,8 +7,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
-    public int x;
-    public int y;
+    public int worldX;
+    public int worldY;
     public int speed;
 
     public BufferedImage up1, up2, up3;
@@ -21,7 +21,7 @@ public class Entity {
     public int spriteCounter = 0;
     public int spriteNum = 1;
 
-    public SpriteSheet spriteSheet = new SpriteSheet("/img/classic.png", 256);
-
-    public ImgCollection imgCollection = new ImgCollection(spriteSheet);
+    //Collision.
+    public Rectangle solidArea;
+    public boolean collisionOn = false;
 }

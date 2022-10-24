@@ -15,13 +15,21 @@ public class Player extends Entity {
     public Player(GamePanel gamePanel, KeyInput keyInput) {
         this.gamePanel = gamePanel;
         this.keyInput = keyInput;
+
+        //Set collision area.
+        solidArea = new Rectangle();
+        solidArea.x = 9;
+        solidArea.y = 3;
+        solidArea.width = 18;
+        solidArea.height = 42;
+
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues() {
-        this.x = gamePanel.tileSize;
-        this.y = gamePanel.tileSize;
+        this.worldX = gamePanel.tileSize;
+        this.worldY = gamePanel.tileSize;
         speed = 4;
     }
 
@@ -48,16 +56,33 @@ public class Player extends Entity {
         if (keyInput.upPressed || keyInput.downPressed || keyInput.leftPressed || keyInput.rightPressed) {
             if (keyInput.upPressed) {
                 direction = "up";
-                y -= speed;
             } else if (keyInput.downPressed) {
                 direction = "down";
-                y += speed;
             } else if (keyInput.leftPressed) {
                 direction = "left";
-                x -= speed;
             } else if (keyInput.rightPressed) {
                 direction = "right";
-                x += speed;
+            }
+
+            //check tile collision
+            collisionOn = false;
+            gamePanel.collisionChecker.checkTile(this);
+
+            if (collisionOn == false) {
+                switch (direction) {
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                }
             }
 
             spriteCounter++;
@@ -121,7 +146,7 @@ public class Player extends Entity {
                     }
                     break;
             }
-            graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+            graphics2D.drawImage(image, worldX, worldY, gamePanel.tileSize, gamePanel.tileSize, null);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
