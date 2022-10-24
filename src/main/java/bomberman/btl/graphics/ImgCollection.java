@@ -1,6 +1,6 @@
 package bomberman.btl.graphics;
 
-import bomberman.btl.BombermanMain;
+import bomberman.btl.main.BombermanMain;
 import javafx.scene.image.Image;
 
 public class ImgCollection {

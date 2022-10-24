@@ -1,4 +1,4 @@
-package bomberman.btl;
+package bomberman.btl.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

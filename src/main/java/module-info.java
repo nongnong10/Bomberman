@@ -6,4 +6,8 @@ module bomberman.btl {
 
     opens bomberman.btl to javafx.fxml;
     exports bomberman.btl;
+    exports bomberman.btl.main;
+    opens bomberman.btl.main to javafx.fxml;
+    exports bomberman.btl.input;
+    opens bomberman.btl.input to javafx.fxml;
 }

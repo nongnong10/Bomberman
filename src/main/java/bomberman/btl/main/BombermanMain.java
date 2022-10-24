@@ -1,4 +1,4 @@
-package bomberman.btl;
+package bomberman.btl.main;
 import javax.swing.JFrame;
 
 public class BombermanMain {

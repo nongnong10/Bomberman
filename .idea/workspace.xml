@@ -5,19 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e5ca4ca-7fdf-4894-a0c6-1f243cc50594" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/GamePanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/KeyInput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/tile/Tile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/tile/TileManager.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../OOP/.idea/OOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/BombermanMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/BombermanMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/characters/Character.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/characters/player/Bomber.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/BreakableWall.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/Grass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/UnbreakableWall.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entities/objects/Wall.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/BombermanMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/BombermanMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/input/KeyInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/graphics/ImgCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/graphics/ImgCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/graphics/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/graphics/Sprite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,11 +56,11 @@
   </component>
   <component name="RunManager">
     <configuration name="BombermanMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="bomberman.btl.BombermanMain" />
+      <option name="MAIN_CLASS_NAME" value="bomberman.btl.main.BombermanMain" />
       <module name="btl" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="bomberman.btl.*" />
+          <option name="PATTERN" value="bomberman.btl.main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -94,7 +92,7 @@
       <workItem from="1666496769323" duration="893000" />
       <workItem from="1666538790524" duration="802000" />
       <workItem from="1666576723455" duration="30000" />
-      <workItem from="1666619053218" duration="5732000" />
+      <workItem from="1666619053218" duration="9424000" />
     </task>
     <servers />
   </component>

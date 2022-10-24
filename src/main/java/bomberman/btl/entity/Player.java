@@ -1,7 +1,7 @@
 package bomberman.btl.entity;
 
-import bomberman.btl.GamePanel;
-import bomberman.btl.KeyInput;
+import bomberman.btl.main.GamePanel;
+import bomberman.btl.input.KeyInput;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,8 +20,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        this.x = 32;
-        this.y = 32;
+        this.x = gamePanel.tileSize;
+        this.y = gamePanel.tileSize;
         speed = 4;
     }
 
