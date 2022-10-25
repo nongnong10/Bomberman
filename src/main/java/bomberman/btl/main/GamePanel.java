@@ -15,8 +15,11 @@ public class GamePanel extends JPanel implements Runnable {
     public final int tileSize = originalTileSize * scale; //48*48 tile
     public final int maxScreenCol = 21;
     public final int maxScreenRow = 11;
+
+    public final int statusCol = maxScreenCol;
+    public final int statusRow = 1;
     public final int screenWidth = maxScreenCol * tileSize; //21 * 48 = 1008
-    public final int screenHeight = maxScreenRow * tileSize; //11 * 48 = 528
+    public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 528
     public KeyInput keyInput = new KeyInput();
     //set player position
     public Player player = new Player(this, keyInput);
@@ -28,10 +31,13 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker collisionChecker = new CollisionChecker(this);
 
     //object
-    public SuperObject[] objects = new SuperObject[10];
+    public SuperObject[] objects = new SuperObject[50];
 
     //set object
     public AssetSetter assetSetter = new AssetSetter(this);
+
+    //UI
+    public UI ui = new UI(this);
 
     public int FPS = 60;
 
@@ -98,6 +104,10 @@ public class GamePanel extends JPanel implements Runnable {
 
         //Player
         player.draw(graphics2D);
+
+        //UI
+        ui.draw(graphics2D);
+
         graphics2D.dispose();
     }
 }
