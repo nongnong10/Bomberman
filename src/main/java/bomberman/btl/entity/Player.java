@@ -8,7 +8,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import static java.lang.System.exit;
+
 public class Player extends Entity {
+    //Trang thai Power up
+    public static long timer = 0;
+    public boolean wallpass = false;
     GamePanel gamePanel;
     KeyInput keyInput;
 
@@ -18,15 +23,15 @@ public class Player extends Entity {
 
         //Set collision area.
         solidArea = new Rectangle();
-        solidArea.x = 9;
-        solidArea.y = 3;
-        solidArea.width = 18;
-        solidArea.height = 42;
+        solidArea.x = 0;
+        solidArea.y = 0;
+        solidArea.width = 36; //12 pixel
+        solidArea.height = 42; //14 pixel
 
-        solidAreaTop = new Rectangle(9,0,18,18);
-        solidAreaBottom = new Rectangle(9,24,18,18);
-        solidAreaLeft = new Rectangle(0,9,18,24);
-        solidAreaRight = new Rectangle(9,9,18,24);
+        solidAreaTop = new Rectangle(9, 0, 18, 18);
+        solidAreaBottom = new Rectangle(9, 24, 18, 18);
+        solidAreaLeft = new Rectangle(0, 9, 18, 24);
+        solidAreaRight = new Rectangle(9, 9, 18, 24);
 
         setDefaultValues();
         getPlayerImage();
@@ -72,6 +77,14 @@ public class Player extends Entity {
             //check tile collision
             collisionOn = false;
             gamePanel.collisionChecker.checkTile(this);
+            if (wallpass){
+                collisionOn = false;
+                timer++;
+            }
+
+            //check object collision
+            int objInd = gamePanel.collisionChecker.checkObject(this, true);
+            pickupObject(objInd);
 
             if (collisionOn == false) {
                 switch (direction) {
@@ -97,6 +110,31 @@ public class Player extends Entity {
                 else if (spriteNum == 3) spriteNum = 1;
                 spriteCounter = 0;
             }
+
+            if (wallpass){
+                long now = System.currentTimeMillis();
+                System.out.println(now - timer);
+                if (now - timer >= 5000){
+                    wallpass = false;
+                    timer = 0;
+                }
+            }
+
+        }
+    }
+
+    public void pickupObject(int index) {
+        if (index != 999) {
+            String objectName = gamePanel.objects[index].name;
+            switch (objectName) {
+                case "wallpass":
+                    wallpass = true;
+                    timer = System.currentTimeMillis();
+                    break;
+                case "door":
+                    break;
+            }
+            gamePanel.objects[index] = null;
         }
     }
 
