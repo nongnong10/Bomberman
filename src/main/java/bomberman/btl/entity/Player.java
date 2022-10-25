@@ -23,6 +23,11 @@ public class Player extends Entity {
         solidArea.width = 18;
         solidArea.height = 42;
 
+        solidAreaTop = new Rectangle(9,0,18,18);
+        solidAreaBottom = new Rectangle(9,24,18,18);
+        solidAreaLeft = new Rectangle(0,9,18,24);
+        solidAreaRight = new Rectangle(9,9,18,24);
+
         setDefaultValues();
         getPlayerImage();
     }
