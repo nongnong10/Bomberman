@@ -21,5 +21,6 @@ public class BombermanMain {
         window.setVisible(true);
 
         gamePanel.startGameThread();
+        gamePanel.setupGame();
     }
 }
