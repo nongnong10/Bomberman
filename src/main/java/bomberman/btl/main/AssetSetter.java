@@ -12,8 +12,8 @@ public class AssetSetter {
 
     public void setObject() {
         gamePanel.objects[0] = new Door();
-        gamePanel.objects[0].worldX = 19 * gamePanel.tileSize;
-        gamePanel.objects[0].worldY = 9 * gamePanel.tileSize;
+        gamePanel.objects[0].worldX = 1 * gamePanel.tileSize;
+        gamePanel.objects[0].worldY = 3 * gamePanel.tileSize;
 
         gamePanel.objects[1] = new Wallpass();
         gamePanel.objects[1].worldX = 1 * gamePanel.tileSize;

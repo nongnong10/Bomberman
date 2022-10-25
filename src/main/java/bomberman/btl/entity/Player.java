@@ -134,6 +134,7 @@ public class Player extends Entity {
                     timer = System.currentTimeMillis();
                     break;
                 case "door":
+                    gamePanel.ui.gameFinished = true;
                     break;
             }
             gamePanel.objects[index] = null;

@@ -18,6 +18,10 @@ public class GamePanel extends JPanel implements Runnable {
 
     public final int statusCol = maxScreenCol;
     public final int statusRow = 1;
+
+    public final int statusWidth = statusCol * tileSize;
+
+    public final int statusHeight = statusRow * tileSize;
     public final int screenWidth = maxScreenCol * tileSize; //21 * 48 = 1008
     public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 528
     public KeyInput keyInput = new KeyInput();
