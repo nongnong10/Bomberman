@@ -4,12 +4,16 @@ import bomberman.btl.object.item.Wallpass;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 
 public class UI {
     public GamePanel gamePanel;
     public Font arial20;
     public Font arial40;
     public BufferedImage wallpassImg;
+
+    public static double playTime = 0;
+    DecimalFormat dformat = new DecimalFormat("#0.00");
 
     public boolean gameFinished = false;
 
@@ -44,6 +48,10 @@ public class UI {
             graphics2D.setFont(arial20);
             graphics2D.setColor(Color.white);
             graphics2D.drawString("Bomb = " + gamePanel.player.numBomb, 50, 557);
+
+            playTime += (double) 1/60;
+            graphics2D.drawString("Time : " + dformat.format(playTime), 200, 557);
+
 
             if (gamePanel.player.wallpass == true) {
                 graphics2D.drawImage(wallpassImg, (gamePanel.maxScreenCol-1)*gamePanel.tileSize,
