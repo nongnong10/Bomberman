@@ -1,5 +1,6 @@
 package bomberman.btl.object;
 
+import bomberman.btl.graphics.UtilityTool;
 import bomberman.btl.main.GamePanel;
 
 import java.awt.*;
@@ -14,8 +15,9 @@ public class SuperObject {
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public int solidAreaDefaultX = 0;
     public int solidAreaDefaultY = 0;
+    public UtilityTool utilityTool = new UtilityTool();
 
     public void draw(Graphics2D graphics2D, GamePanel gamePanel) {
-        graphics2D.drawImage(image, worldX, worldY, gamePanel.tileSize, gamePanel.tileSize, null);
+        graphics2D.drawImage(image, worldX, worldY, null);
     }
 }

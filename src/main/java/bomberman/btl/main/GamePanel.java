@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int statusHeight = statusRow * tileSize;
     public final int screenWidth = maxScreenCol * tileSize; //21 * 48 = 1008
     public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 528
-    public KeyInput keyInput = new KeyInput();
+    public KeyInput keyInput = new KeyInput(this);
     //set player position
     public Player player = new Player(this, keyInput);
 
@@ -43,6 +43,11 @@ public class GamePanel extends JPanel implements Runnable {
     //UI
     public UI ui = new UI(this);
 
+    //Game state
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState = 2;
+
     public int FPS = 60;
 
     //Once start it, it keep program running until you stop it
@@ -59,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         assetSetter.setObject();
+        gameState = playState;
     }
 
     public void startGameThread() {
@@ -90,7 +96,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.update();
+        if (gameState == playState){
+            player.update();
+        }
+        if (gameState == pauseState){
+
+        }
     }
 
     public void paintComponent(Graphics graphics) {

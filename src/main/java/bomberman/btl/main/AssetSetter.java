@@ -11,11 +11,11 @@ public class AssetSetter {
     }
 
     public void setObject() {
-        gamePanel.objects[0] = new Door();
+        gamePanel.objects[0] = new Door(this.gamePanel);
         gamePanel.objects[0].worldX = 1 * gamePanel.tileSize;
         gamePanel.objects[0].worldY = 3 * gamePanel.tileSize;
 
-        gamePanel.objects[1] = new Wallpass();
+        gamePanel.objects[1] = new Wallpass(this.gamePanel);
         gamePanel.objects[1].worldX = 1 * gamePanel.tileSize;
         gamePanel.objects[1].worldY = 5 * gamePanel.tileSize;
     }

@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e5ca4ca-7fdf-4894-a0c6-1f243cc50594" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/graphics/UtilityTool.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../OOP/.idea/OOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/input/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/input/KeyInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/AssetSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/AssetSetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/tile/TileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/tile/TileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/object/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/object/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/object/SuperObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/object/SuperObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/object/item/Wallpass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/object/item/Wallpass.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +95,7 @@
       <workItem from="1666664757156" duration="9052000" />
       <workItem from="1666685322174" duration="494000" />
       <workItem from="1666686823178" duration="6362000" />
-      <workItem from="1666750027586" duration="1815000" />
+      <workItem from="1666750027586" duration="4265000" />
     </task>
     <servers />
   </component>

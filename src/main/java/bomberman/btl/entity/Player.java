@@ -210,7 +210,7 @@ public class Player extends Entity {
                     }
                     break;
             }
-            graphics2D.drawImage(image, worldX, worldY, gamePanel.tileSize, gamePanel.tileSize, null);
+            graphics2D.drawImage(image, worldX, worldY, null);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }

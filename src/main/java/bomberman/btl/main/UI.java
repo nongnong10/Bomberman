@@ -20,8 +20,14 @@ public class UI {
         this.arial20 = new Font("Arial", Font.BOLD, 20);
         this.arial40 = new Font("Arial", Font.BOLD, 40);
 
-        Wallpass wallpass = new Wallpass();
+        Wallpass wallpass = new Wallpass(this.gamePanel);
         wallpassImg = wallpass.image;
+    }
+
+    public int getXForCenterText(String text, Graphics2D graphics2D) {
+        int textLength = (int) graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
+        int x = gamePanel.screenWidth / 2 - textLength / 2;
+        return x;
     }
 
     public void draw(Graphics2D graphics2D) {
@@ -30,20 +36,17 @@ public class UI {
             graphics2D.setColor(Color.yellow);
 
             String text;
-            int textLength;
             int x, y;
 
             text = "YOU WIN!";
-            textLength = (int) graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
-            x = gamePanel.screenWidth / 2 - textLength / 2;
+            x = getXForCenterText(text, graphics2D);
             y = (gamePanel.screenHeight - gamePanel.statusHeight) / 2;
             graphics2D.drawString(text, x, y);
 
             graphics2D.setFont(arial20);
             graphics2D.setColor(Color.white);
             text = "Your time play is : " + dformat.format(playTime) + "s !";
-            textLength = (int) graphics2D.getFontMetrics().getStringBounds(text, graphics2D).getWidth();
-            x = gamePanel.screenWidth / 2 - textLength / 2;
+            x = getXForCenterText(text, graphics2D);
             y = (gamePanel.screenHeight - gamePanel.statusHeight) / 2 + gamePanel.tileSize;
             graphics2D.drawString(text, x, y);
 
@@ -53,7 +56,9 @@ public class UI {
             graphics2D.setColor(Color.white);
             graphics2D.drawString("Bomb = " + gamePanel.player.numBomb, 50, 557);
 
-            playTime += (double) 1 / 60;
+            if (gamePanel.gameState == gamePanel.playState) {
+                playTime += (double) 1 / 60;
+            }
             graphics2D.drawString("Time : " + dformat.format(playTime), 200, 557);
 
 
@@ -62,5 +67,18 @@ public class UI {
                         (gamePanel.maxScreenRow) * gamePanel.tileSize + 7, gamePanel.tileSize / 3 * 2, gamePanel.tileSize / 3 * 2, null);
             }
         }
+        if (gamePanel.gameState == gamePanel.pauseState) {
+            drawPauseScreen(graphics2D);
+        }
+    }
+
+    public void drawPauseScreen(Graphics2D graphics2D) {
+        String text = "PAUSED";
+        int x, y;
+        graphics2D.setFont(arial40);
+        graphics2D.setColor(Color.white);
+        x = getXForCenterText(text, graphics2D);
+        y = (gamePanel.screenHeight - gamePanel.statusHeight) / 2;
+        graphics2D.drawString(text, x, y);
     }
 }
