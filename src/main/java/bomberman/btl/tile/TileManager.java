@@ -1,5 +1,6 @@
 package bomberman.btl.tile;
 
+import bomberman.btl.graphics.UtilityTool;
 import bomberman.btl.main.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -16,7 +17,7 @@ public class TileManager {
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        tile = new Tile[10];
+        tile = new Tile[50];
         mapTile = new char[gamePanel.maxScreenRow][gamePanel.maxScreenCol];
         mapTileNum = new int[gamePanel.maxScreenRow][gamePanel.maxScreenCol];
         getTileImage();
@@ -24,18 +25,19 @@ public class TileManager {
     }
 
     public void getTileImage() {
+        setupTile(0, "grass", false);
+        setupTile(1, "wall", true);
+        setupTile(2, "brick", true);
+    }
+
+    public void setupTile(int index, String imgPath, boolean collision) {
+        UtilityTool utilityTool = new UtilityTool();
         try {
-            tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/img/tile/grass.png"));
-
-            tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/img/tile/wall.png"));
-            tile[1].collision = true;
-
-            tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/img/tile/brick.png"));
-            tile[2].collision = true;
-        } catch (IOException e) {
+            tile[index] = new Tile();
+            tile[index].image = ImageIO.read(getClass().getResourceAsStream("/img/tile/" + imgPath + ".png"));
+            tile[index].image = utilityTool.scaleImage(tile[index].image, gamePanel.tileSize, gamePanel.tileSize);
+            tile[index].collision = collision;
+        } catch (IOException e){
             e.printStackTrace();
         }
     }

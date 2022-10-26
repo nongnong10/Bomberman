@@ -1,5 +1,6 @@
 package bomberman.btl.entity;
 
+import bomberman.btl.graphics.UtilityTool;
 import bomberman.btl.main.GamePanel;
 import bomberman.btl.input.KeyInput;
 
@@ -46,22 +47,31 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
+        up1 = setupImage("player_up");
+        up2 = setupImage("player_up_1");
+        up3 = setupImage("player_up_2");
+        down1 = setupImage("player_down");
+        down2 = setupImage("player_down_1");
+        down3 = setupImage("player_down_2");
+        left1 = setupImage("player_left");
+        left2 = setupImage("player_left_1");
+        left3 = setupImage("player_left_2");
+        right1 = setupImage("player_right");
+        right2 = setupImage("player_right_1");
+        right3 = setupImage("player_right_2");
+    }
+
+    public BufferedImage setupImage(String imgPath) {
+        UtilityTool utilityTool = new UtilityTool();
+        BufferedImage image = null;
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_up.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_up_1.png"));
-            up3 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_down.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_down_1.png"));
-            down3 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_left.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_left_1.png"));
-            left3 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_right.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_right_1.png"));
-            right3 = ImageIO.read(getClass().getResourceAsStream("/img/player/player_right_2.png"));
-        } catch (IOException e) {
+            image = ImageIO.read(getClass().getResourceAsStream("/img/player/" + imgPath + ".png"));
+            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
+
+        } catch (IOException e){
             e.printStackTrace();
         }
+        return image;
     }
 
     public void update() {
@@ -79,10 +89,18 @@ public class Player extends Entity {
             //check tile collision
             collisionOn = false;
             gamePanel.collisionChecker.checkTile(this);
-            if (wallpass){
+            if (wallpass) {
                 collisionOn = false;
                 timer++;
             }
+
+            //fix bug in wall
+//            int nrow = this.worldY / gamePanel.tileSize;
+//            int ncol = this.worldX / gamePanel.tileSize;
+//            char tmp = gamePanel.tileManager.mapTile[nrow][ncol];
+//            if (tmp == '#' || tmp == '*'){
+//                collisionOn = false;
+//            }
 
             //check object collision
             int objInd = gamePanel.collisionChecker.checkObject(this, true);
@@ -113,10 +131,10 @@ public class Player extends Entity {
                 spriteCounter = 0;
             }
 
-            if (wallpass){
+            if (wallpass) {
                 long now = System.currentTimeMillis();
                 System.out.println(now - timer);
-                if (now - timer >= 5000){
+                if (now - timer >= 5000) {
                     wallpass = false;
                     timer = 0;
                 }
