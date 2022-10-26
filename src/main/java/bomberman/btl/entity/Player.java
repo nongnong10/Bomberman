@@ -1,15 +1,9 @@
 package bomberman.btl.entity;
 
-import bomberman.btl.graphics.UtilityTool;
 import bomberman.btl.main.GamePanel;
 import bomberman.btl.input.KeyInput;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import static java.lang.System.exit;
 
 public class Player extends Entity {
     //Trang thai Power up
@@ -46,31 +40,18 @@ public class Player extends Entity {
     }
 
     public void getPlayerImage() {
-        up1 = setupImage("player_up");
-        up2 = setupImage("player_up_1");
-        up3 = setupImage("player_up_2");
-        down1 = setupImage("player_down");
-        down2 = setupImage("player_down_1");
-        down3 = setupImage("player_down_2");
-        left1 = setupImage("player_left");
-        left2 = setupImage("player_left_1");
-        left3 = setupImage("player_left_2");
-        right1 = setupImage("player_right");
-        right2 = setupImage("player_right_1");
-        right3 = setupImage("player_right_2");
-    }
-
-    public BufferedImage setupImage(String imgPath) {
-        UtilityTool utilityTool = new UtilityTool();
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream("/img/player/" + imgPath + ".png"));
-            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
-
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return image;
+        up1 = setupImage("/player/player_up");
+        up2 = setupImage("/player/player_up_1");
+        up3 = setupImage("/player/player_up_2");
+        down1 = setupImage("/player/player_down");
+        down2 = setupImage("/player/player_down_1");
+        down3 = setupImage("/player/player_down_2");
+        left1 = setupImage("/player/player_left");
+        left2 = setupImage("/player/player_left_1");
+        left3 = setupImage("/player/player_left_2");
+        right1 = setupImage("/player/player_right");
+        right2 = setupImage("/player/player_right_1");
+        right3 = setupImage("/player/player_right_2");
     }
 
     public void update() {
@@ -87,23 +68,19 @@ public class Player extends Entity {
 
             //check tile collision
             collisionOn = false;
-            gamePanel.collisionChecker.checkTile(this);
+            gamePanel.collisionChecker.checkTilePlayer(this);
             if (wallpass) {
                 collisionOn = false;
                 timer++;
             }
 
-            //fix bug in wall
-//            int nrow = this.worldY / gamePanel.tileSize;
-//            int ncol = this.worldX / gamePanel.tileSize;
-//            char tmp = gamePanel.tileManager.mapTile[nrow][ncol];
-//            if (tmp == '#' || tmp == '*'){
-//                collisionOn = false;
-//            }
-
             //check object collision
             int objInd = gamePanel.collisionChecker.checkObject(this, true);
             pickupObject(objInd);
+
+            //check enemy collision
+            int enemyInd = gamePanel.collisionChecker.checkEntity(this, gamePanel.enemies);
+            interactEnemy(enemyInd);
 
             if (collisionOn == false) {
                 switch (direction) {
@@ -155,6 +132,12 @@ public class Player extends Entity {
                     break;
             }
             gamePanel.objects[index] = null;
+        }
+    }
+
+    public void interactEnemy(int index) {
+        if (index != 999){
+            System.out.println("Hit a enemy!");
         }
     }
 }

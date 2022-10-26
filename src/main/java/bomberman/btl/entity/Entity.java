@@ -1,7 +1,5 @@
 package bomberman.btl.entity;
 
-import bomberman.btl.graphics.ImgCollection;
-import bomberman.btl.graphics.SpriteSheet;
 import bomberman.btl.graphics.UtilityTool;
 import bomberman.btl.main.GamePanel;
 
@@ -40,8 +38,49 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
 
+    //Interval for Enemy
+    public int actionLockCounter = 0;
+
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+    }
+
+    public void setAction(){
+
+    }
+
+    public void update(){
+        setAction();
+
+        collisionOn = false;
+        gamePanel.collisionChecker.checkTileEntity(this);
+        gamePanel.collisionChecker.checkObject(this, false);
+        gamePanel.collisionChecker.checkPlayer(this);
+
+        if (collisionOn == false) {
+            switch (direction) {
+                case "up":
+                    worldY -= speed;
+                    break;
+                case "down":
+                    worldY += speed;
+                    break;
+                case "left":
+                    worldX -= speed;
+                    break;
+                case "right":
+                    worldX += speed;
+                    break;
+            }
+        }
+
+        spriteCounter++;
+        if (spriteCounter > 10) {
+            if (spriteNum == 1) spriteNum = 2;
+            else if (spriteNum == 2) spriteNum = 3;
+            else if (spriteNum == 3) spriteNum = 1;
+            spriteCounter = 0;
+        }
     }
 
     public void draw(Graphics2D graphics2D) {

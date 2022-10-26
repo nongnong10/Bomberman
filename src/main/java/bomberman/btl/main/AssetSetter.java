@@ -1,5 +1,6 @@
 package bomberman.btl.main;
 
+import bomberman.btl.entity.enemy.Ballom;
 import bomberman.btl.object.Door;
 import bomberman.btl.object.item.Wallpass;
 
@@ -18,5 +19,11 @@ public class AssetSetter {
         gamePanel.objects[1] = new Wallpass(this.gamePanel);
         gamePanel.objects[1].worldX = 1 * gamePanel.tileSize;
         gamePanel.objects[1].worldY = 5 * gamePanel.tileSize;
+    }
+
+    public void setEnemy() {
+        gamePanel.enemies[0] = new Ballom(this.gamePanel);
+        gamePanel.enemies[0].worldX = 4* gamePanel.tileSize;
+        gamePanel.enemies[0].worldY = 1* gamePanel.tileSize;
     }
 }

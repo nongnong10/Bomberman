@@ -20,11 +20,10 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxScreenCol = 21;
     public final int maxScreenRow = 11;
     public final int statusCol = maxScreenCol;
-    public final int statusRow = 1;
     public final int statusWidth = statusCol * tileSize;
+    public final int statusRow = 1;
     public final int statusHeight = statusRow * tileSize;
     public final int screenWidth = maxScreenCol * tileSize; //21 * 48 = 1008
-
     public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 528
     public final int playState = 1;
     public final int pauseState = 2;
@@ -37,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     //object
     public Entity[] objects = new Entity[20];
+    public Entity[] enemies = new Entity[20];
     //set object
     public AssetSetter assetSetter = new AssetSetter(this);
     //UI
@@ -59,6 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         assetSetter.setObject();
+        assetSetter.setEnemy();
         gameState = playState;
     }
 
@@ -93,6 +94,11 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (gameState == playState) {
             player.update();
+            for (int i = 0; i < enemies.length; ++i) {
+                if (enemies[i] != null) {
+                    enemies[i].update();
+                }
+            }
         }
         if (gameState == pauseState) {
             //pause = not update
@@ -114,22 +120,36 @@ public class GamePanel extends JPanel implements Runnable {
 
         for (int i = 0; i < objects.length; ++i) {
             if (objects[i] != null) {
-                //System.out.println(i + " " + objects[i].name);
                 entities.add(objects[i]);
             }
         }
-        //System.out.println(entities.size());
+
+        //Add enemies
+        for (int i = 0; i < enemies.length; ++i) {
+            if (enemies[i] != null) {
+                entities.add(enemies[i]);
+            }
+        }
 
         //Sort
         Collections.sort(entities, new Comparator<Entity>() {
             @Override
             public int compare(Entity o1, Entity o2) {
-                int res = Integer.compare(o1.worldY, o2.worldY);
+                int res = 0;
+                if (o1.name == o2.name) {
+                    res = Integer.compare(o1.worldY, o2.worldY);
+                } else {
+                    if (o1.name == "enemy"){
+                        res = 1;
+                    } else{
+                        res = -1;
+                    }
+                }
                 return res;
             }
         });
         //Draw entities
-        for (int i=0; i<entities.size(); ++i) {
+        for (int i = 0; i < entities.size(); ++i) {
             //System.out.println(i + " : " + entities.get(i).name);
             entities.get(i).draw(graphics2D);
         }
