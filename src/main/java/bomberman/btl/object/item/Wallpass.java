@@ -1,23 +1,20 @@
 package bomberman.btl.object.item;
 
+import bomberman.btl.entity.Entity;
 import bomberman.btl.main.GamePanel;
 import bomberman.btl.object.SuperObject;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.IOException;
 
-public class Wallpass extends SuperObject {
-    GamePanel gamePanel;
+public class Wallpass extends Entity {
     public Wallpass(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
-        this.name = "wallpass";
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream("/img/item/powerup_wallpass.png"));
-            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        super(gamePanel);
+        super.name = "wallpass";
+        down1 = setupImage("/item/powerup_wallpass");
         //co va cham
         collision = false;
+        solidArea = new Rectangle(0,0,gamePanel.tileSize, gamePanel.tileSize);
     }
 }

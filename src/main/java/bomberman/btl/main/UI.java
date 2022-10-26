@@ -21,7 +21,7 @@ public class UI {
         this.arial40 = new Font("Arial", Font.BOLD, 40);
 
         Wallpass wallpass = new Wallpass(this.gamePanel);
-        wallpassImg = wallpass.image;
+        wallpassImg = wallpass.down1;
     }
 
     public int getXForCenterText(String text, Graphics2D graphics2D) {
@@ -32,24 +32,7 @@ public class UI {
 
     public void draw(Graphics2D graphics2D) {
         if (gameFinished == true) {
-            graphics2D.setFont(arial40);
-            graphics2D.setColor(Color.yellow);
-
-            String text;
-            int x, y;
-
-            text = "YOU WIN!";
-            x = getXForCenterText(text, graphics2D);
-            y = (gamePanel.screenHeight - gamePanel.statusHeight) / 2;
-            graphics2D.drawString(text, x, y);
-
-            graphics2D.setFont(arial20);
-            graphics2D.setColor(Color.white);
-            text = "Your time play is : " + dformat.format(playTime) + "s !";
-            x = getXForCenterText(text, graphics2D);
-            y = (gamePanel.screenHeight - gamePanel.statusHeight) / 2 + gamePanel.tileSize;
-            graphics2D.drawString(text, x, y);
-
+            drawFinishedScreen(graphics2D);
             gamePanel.gameThread = null;
         } else {
             graphics2D.setFont(arial20);
@@ -70,6 +53,26 @@ public class UI {
         if (gamePanel.gameState == gamePanel.pauseState) {
             drawPauseScreen(graphics2D);
         }
+    }
+
+    public void drawFinishedScreen(Graphics2D graphics2D){
+        graphics2D.setFont(arial40);
+        graphics2D.setColor(Color.yellow);
+
+        String text;
+        int x, y;
+
+        text = "YOU WIN!";
+        x = getXForCenterText(text, graphics2D);
+        y = (gamePanel.screenHeight - gamePanel.statusHeight) / 2;
+        graphics2D.drawString(text, x, y);
+
+        graphics2D.setFont(arial20);
+        graphics2D.setColor(Color.white);
+        text = "Your time play is : " + dformat.format(playTime) + "s !";
+        x = getXForCenterText(text, graphics2D);
+        y = (gamePanel.screenHeight - gamePanel.statusHeight) / 2 + gamePanel.tileSize;
+        graphics2D.drawString(text, x, y);
     }
 
     public void drawPauseScreen(Graphics2D graphics2D) {

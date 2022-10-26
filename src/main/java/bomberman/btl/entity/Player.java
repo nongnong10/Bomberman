@@ -17,11 +17,10 @@ public class Player extends Entity {
     public boolean wallpass = false;
 
     public int numBomb = 1;
-    GamePanel gamePanel;
     KeyInput keyInput;
 
     public Player(GamePanel gamePanel, KeyInput keyInput) {
-        this.gamePanel = gamePanel;
+        super(gamePanel);
         this.keyInput = keyInput;
 
         //Set collision area.
@@ -133,7 +132,6 @@ public class Player extends Entity {
 
             if (wallpass) {
                 long now = System.currentTimeMillis();
-                System.out.println(now - timer);
                 if (now - timer >= 5000) {
                     wallpass = false;
                     timer = 0;
@@ -146,6 +144,7 @@ public class Player extends Entity {
     public void pickupObject(int index) {
         if (index != 999) {
             String objectName = gamePanel.objects[index].name;
+            System.out.println(objectName);
             switch (objectName) {
                 case "wallpass":
                     wallpass = true;
@@ -157,63 +156,5 @@ public class Player extends Entity {
             }
             gamePanel.objects[index] = null;
         }
-    }
-
-    public void draw(Graphics2D graphics2D) {
-//        graphics2D.setColor(Color.white);
-//        graphics2D.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);
-        try {
-            BufferedImage image = null;
-            switch (direction) {
-                case "up":
-                    if (spriteNum == 1) {
-                        image = up1;
-                    }
-                    if (spriteNum == 2) {
-                        image = up2;
-                    }
-                    if (spriteNum == 3) {
-                        image = up3;
-                    }
-                    break;
-                case "down":
-                    if (spriteNum == 1) {
-                        image = down1;
-                    }
-                    if (spriteNum == 2) {
-                        image = down2;
-                    }
-                    if (spriteNum == 3) {
-                        image = down3;
-                    }
-                    break;
-                case "left":
-                    if (spriteNum == 1) {
-                        image = left1;
-                    }
-                    if (spriteNum == 2) {
-                        image = left2;
-                    }
-                    if (spriteNum == 3) {
-                        image = left3;
-                    }
-                    break;
-                case "right":
-                    if (spriteNum == 1) {
-                        image = right1;
-                    }
-                    if (spriteNum == 2) {
-                        image = right2;
-                    }
-                    if (spriteNum == 3) {
-                        image = right3;
-                    }
-                    break;
-            }
-            graphics2D.drawImage(image, worldX, worldY, null);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-
     }
 }
