@@ -1,9 +1,11 @@
 package bomberman.btl.main;
 
 import bomberman.btl.entity.Entity;
+import bomberman.btl.entity.weapon.Bomb;
+import bomberman.btl.entity.weapon.Flame;
+import bomberman.btl.entity.weapon.Projectile;
 import bomberman.btl.input.KeyInput;
 import bomberman.btl.entity.Player;
-import bomberman.btl.object.SuperObject;
 import bomberman.btl.tile.TileManager;
 
 import javax.swing.*;
@@ -37,6 +39,10 @@ public class GamePanel extends JPanel implements Runnable {
     //object
     public Entity[] objects = new Entity[20];
     public Entity[] enemies = new Entity[20];
+
+    public Bomb[] bombs  = new Bomb[10];
+    public Flame[] flames  = new Flame[10];
+    public static int hasBomb = -1;
     //set object
     public AssetSetter assetSetter = new AssetSetter(this);
     //UI
@@ -44,7 +50,9 @@ public class GamePanel extends JPanel implements Runnable {
     //Game state
     public int gameState;
     public int FPS = 60;
-    ArrayList<Entity> entities = new ArrayList<>();
+    public ArrayList<Entity> entities = new ArrayList<>();
+    public ArrayList<Bomb> projectiles = new ArrayList<>();
+    public ArrayList<Flame> flame = new ArrayList<>();
     //Once start it, it keep program running until you stop it
     Thread gameThread;
 
@@ -110,10 +118,6 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D graphics2D = (Graphics2D) graphics;
         //Tile
         tileManager.draw(graphics2D);
-//        for (Entity i: entities){
-//            System.out.println(i.name);
-//        }
-//        System.out.println(entities.size());
 
         //Add entity to List
         entities.add(player);
@@ -128,6 +132,33 @@ public class GamePanel extends JPanel implements Runnable {
         for (int i = 0; i < enemies.length; ++i) {
             if (enemies[i] != null) {
                 entities.add(enemies[i]);
+            }
+        }
+
+        //Add bomb
+        for (int i = 0; i < projectiles.size(); ++i) {
+            if (projectiles.get(i) != null) {
+                if (projectiles.get(i).alive == true){
+                    projectiles.get(i).update();
+                }
+                if (projectiles.get(i).alive == false){
+                    bombs[player.numBomb+1] = null;
+                    projectiles.remove(i);
+                    player.numBomb = 1;
+                }
+            }
+        }
+
+        for (int i = 0; i < flame.size(); ++i) {
+            if (flame.get(i) != null) {
+                if (flame.get(i).alive == true){
+                    flame.get(i).update();
+                }
+                if (flame.get(i).alive == false){
+                    flames[player.numBomb+1] = null;
+                    flame.remove(i);
+                    player.numBomb = 1;
+                }
             }
         }
 
@@ -152,6 +183,13 @@ public class GamePanel extends JPanel implements Runnable {
         for (int i = 0; i < entities.size(); ++i) {
             //System.out.println(i + " : " + entities.get(i).name);
             entities.get(i).draw(graphics2D);
+        }
+        for (int i = 0; i < projectiles.size(); ++i) {
+            //System.out.println(i + " : " + projectiles.get(i).name);
+            projectiles.get(i).draw(graphics2D);
+        }
+        for (int i=0; i<flame.size(); ++i){
+            flame.get(i).draw(graphics2D);
         }
         //Remove
         entities.clear();

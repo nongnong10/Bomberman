@@ -11,6 +11,7 @@ public class KeyInput implements KeyListener {
     public boolean downPressed = false;
     public boolean leftPressed = false;
     public boolean rightPressed = false;
+    public boolean bombPressed = false;
 
     public KeyInput(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -31,6 +32,10 @@ public class KeyInput implements KeyListener {
                 break;
             case KeyEvent.VK_RIGHT:
                 rightPressed = true;
+                break;
+            case KeyEvent.VK_SPACE:
+                System.out.println("Place a bomb!");
+                bombPressed = true;
                 break;
             case KeyEvent.VK_P:
                 if (gamePanel.gameState == gamePanel.playState) {
@@ -57,6 +62,9 @@ public class KeyInput implements KeyListener {
                 break;
             case KeyEvent.VK_RIGHT:
                 rightPressed = false;
+                break;
+            case KeyEvent.VK_SPACE:
+                bombPressed = false;
                 break;
         }
     }

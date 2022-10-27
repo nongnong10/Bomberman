@@ -1,5 +1,8 @@
 package bomberman.btl.entity;
 
+import bomberman.btl.entity.weapon.Bomb;
+import bomberman.btl.entity.weapon.Flame;
+import bomberman.btl.entity.weapon.Projectile;
 import bomberman.btl.main.GamePanel;
 import bomberman.btl.input.KeyInput;
 
@@ -55,7 +58,7 @@ public class Player extends Entity {
     }
 
     public void update() {
-        if (keyInput.upPressed || keyInput.downPressed || keyInput.leftPressed || keyInput.rightPressed) {
+        if (keyInput.upPressed || keyInput.downPressed || keyInput.leftPressed || keyInput.rightPressed || keyInput.bombPressed) {
             if (keyInput.upPressed) {
                 direction = "up";
             } else if (keyInput.downPressed) {
@@ -64,6 +67,9 @@ public class Player extends Entity {
                 direction = "left";
             } else if (keyInput.rightPressed) {
                 direction = "right";
+            } else if (keyInput.bombPressed) {
+                placeBomb();
+                return;
             }
 
             //check tile collision
@@ -114,7 +120,9 @@ public class Player extends Entity {
                     timer = 0;
                 }
             }
-
+        }
+        if (keyInput.bombPressed == true) {
+            placeBomb();
         }
     }
 
@@ -136,8 +144,23 @@ public class Player extends Entity {
     }
 
     public void interactEnemy(int index) {
-        if (index != 999){
-            System.out.println("Hit a enemy!");
+        if (index != 999) {
+            //System.out.println("Hit a enemy!");
+        }
+    }
+
+    public void placeBomb() {
+//        if (numBomb > 0){
+//            System.out.println(numBomb + " : " + worldX + " " + worldY);
+//            gamePanel.bombs[numBomb] = new Bomb(gamePanel, worldX, worldY, this);
+//            gamePanel.projectiles.add(gamePanel.bombs[numBomb]);
+//            numBomb--;
+//        }
+        if (numBomb > 0){
+            System.out.println(numBomb + " : " + worldX + " " + worldY);
+            gamePanel.flames[numBomb] = new Flame(gamePanel, worldX, worldY, this);
+            gamePanel.flame.add(gamePanel.flames[numBomb]);
+            numBomb--;
         }
     }
 }

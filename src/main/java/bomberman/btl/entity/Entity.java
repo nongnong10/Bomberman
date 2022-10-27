@@ -49,12 +49,11 @@ public class Entity {
 
     }
 
-    public void update(){
-        setAction();
-
+    public void setMove(){
         collisionOn = false;
         gamePanel.collisionChecker.checkTileEntity(this);
         gamePanel.collisionChecker.checkObject(this, false);
+        gamePanel.collisionChecker.checkEntity(this, gamePanel.bombs);
         gamePanel.collisionChecker.checkPlayer(this);
 
         if (collisionOn == false) {
@@ -73,6 +72,12 @@ public class Entity {
                     break;
             }
         }
+    }
+
+    public void update(){
+        setAction();
+
+        setMove();
 
         spriteCounter++;
         if (spriteCounter > 10) {

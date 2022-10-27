@@ -5,13 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e5ca4ca-7fdf-4894-a0c6-1f243cc50594" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Ballom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Enemy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/weapon/Bomb.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/weapon/Flame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/weapon/Projectile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/bomb/bomb_exploded.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/bomb/bomb_exploded1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/bomb/bomb_exploded2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/bomb/explosion_horizontal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/bomb/explosion_horizontal1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/bomb/explosion_horizontal2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/bomb/explosion_horizontal_left_last.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/bomb/explosion_horizontal_left_last1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/img/bomb/explosion_horizontal_left_last2.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../OOP/.idea/OOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/AssetSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/AssetSetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/input/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/input/KeyInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/CollisionChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/GamePanel.java" afterDir="false" />
     </list>
@@ -34,19 +44,22 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2GOLKuAuM5kOGT6GIHQDAvo1kx2" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="bomberman.btl" />
@@ -95,7 +108,9 @@
       <workItem from="1666685322174" duration="494000" />
       <workItem from="1666686823178" duration="6362000" />
       <workItem from="1666750027586" duration="9022000" />
-      <workItem from="1666766926951" duration="5128000" />
+      <workItem from="1666766926951" duration="9785000" />
+      <workItem from="1666790307267" duration="322000" />
+      <workItem from="1666849517606" duration="7489000" />
     </task>
     <servers />
   </component>
@@ -112,5 +127,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
