@@ -5,14 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e5ca4ca-7fdf-4894-a0c6-1f243cc50594" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/map/map4.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../OOP/.idea/OOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/weapon/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/weapon/Bomb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/weapon/Flame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/weapon/Flame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/weapon/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/weapon/Projectile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/CollisionChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/img/enemy/ballom/mob_dead1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/mob_dead1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/img/enemy/ballom/mob_dead2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/mob_dead2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/img/enemy/ballom/mob_dead3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/mob_dead3.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,15 +44,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="bomberman.btl" />
@@ -99,7 +103,8 @@
       <workItem from="1666750027586" duration="9022000" />
       <workItem from="1666766926951" duration="9785000" />
       <workItem from="1666790307267" duration="322000" />
-      <workItem from="1666849517606" duration="13512000" />
+      <workItem from="1666849517606" duration="16245000" />
+      <workItem from="1666890319064" duration="3724000" />
     </task>
     <servers />
   </component>

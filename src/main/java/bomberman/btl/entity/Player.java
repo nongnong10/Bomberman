@@ -14,6 +14,8 @@ public class Player extends Entity {
     public boolean wallpass = false;
 
     public int numBomb = 1;
+
+    public int life = 3;
     KeyInput keyInput;
 
     public Player(GamePanel gamePanel, KeyInput keyInput) {
@@ -146,7 +148,8 @@ public class Player extends Entity {
 
     public void interactEnemy(int index) {
         if (index != 999) {
-            //System.out.println("Hit a enemy!");
+            System.out.println("Hit a enemy!");
+            gamePanel.enemies[index].dying = true;
         }
     }
 
@@ -168,7 +171,7 @@ public class Player extends Entity {
             else{
                 yBomb = nrow * gamePanel.tileSize;
             }
-            System.out.println(numBomb + " : " + xBomb/ gamePanel.tileSize + " " + ncol/gamePanel.tileSize);
+            //System.out.println(numBomb + " : " + xBomb/ gamePanel.tileSize + " " + ncol/gamePanel.tileSize);
             gamePanel.bombs[numBomb] = new Bomb(gamePanel, xBomb, yBomb, this);
             gamePanel.projectiles.add(gamePanel.bombs[numBomb]);
             numBomb--;

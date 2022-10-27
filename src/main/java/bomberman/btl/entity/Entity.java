@@ -15,6 +15,9 @@ public class Entity {
 
     public GamePanel gamePanel;
 
+    public boolean alive;
+    public boolean dying;
+
     public BufferedImage up1, up2, up3;
     public BufferedImage down1, down2, down3;
     public BufferedImage left1, left2, left3;
@@ -50,28 +53,7 @@ public class Entity {
     }
 
     public void setMove(){
-        collisionOn = false;
-        gamePanel.collisionChecker.checkTileEntity(this);
-        gamePanel.collisionChecker.checkObject(this, false);
-        gamePanel.collisionChecker.checkEntity(this, gamePanel.bombs);
-        gamePanel.collisionChecker.checkPlayer(this);
 
-        if (collisionOn == false) {
-            switch (direction) {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
-            }
-        }
     }
 
     public void update(){

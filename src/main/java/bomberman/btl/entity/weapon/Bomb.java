@@ -37,10 +37,7 @@ public class Bomb extends Projectile {
 
     @Override
     public void setMove() {
-        collisionOn = false;
-        gamePanel.collisionChecker.checkTileEntity(this);
-        gamePanel.collisionChecker.checkObject(this, false);
-        gamePanel.collisionChecker.checkPlayer(this);
+        
     }
 
     @Override

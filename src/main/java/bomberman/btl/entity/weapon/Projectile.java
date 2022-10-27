@@ -7,7 +7,6 @@ public class Projectile extends Entity {
     public Entity user;
     //Thoi gian cho no
     public int lifeTime;
-    public boolean alive;
     public Projectile(GamePanel gamePanel, int x, int y, Entity user) {
         super(gamePanel);
         alive = true;
@@ -36,10 +35,7 @@ public class Projectile extends Entity {
 
     @Override
     public void setMove() {
-        collisionOn = false;
-        gamePanel.collisionChecker.checkTileEntity(this);
-        gamePanel.collisionChecker.checkObject(this, false);
-        gamePanel.collisionChecker.checkPlayer(this);
+
     }
 
     @Override

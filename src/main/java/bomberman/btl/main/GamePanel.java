@@ -8,8 +8,11 @@ import bomberman.btl.input.KeyInput;
 import bomberman.btl.entity.Player;
 import bomberman.btl.tile.TileManager;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -104,9 +107,16 @@ public class GamePanel extends JPanel implements Runnable {
             player.update();
             for (int i = 0; i < enemies.length; ++i) {
                 if (enemies[i] != null) {
-                    enemies[i].update();
+                    if (enemies[i].alive == true && enemies[i].dying == false){
+                        enemies[i].update();
+                    }
+                    if (enemies[i].alive == false){
+                        System.out.println("gone");
+                        enemies[i] = null;
+                    }
                 }
             }
+
         }
         if (gameState == pauseState) {
             //pause = not update
