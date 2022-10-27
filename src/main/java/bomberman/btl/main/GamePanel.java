@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 528
     public final int playState = 1;
     public final int pauseState = 2;
+    public final int finishState = 3;
     public KeyInput keyInput = new KeyInput(this);
     //set player position
     public Player player = new Player(this, keyInput);
@@ -104,7 +105,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         if (gameState == playState) {
-            player.update();
+            if (player.alive == true && player.dying == false){
+                player.update();
+            }
+            if (player.alive == false){
+                this.ui.gameFinished = true;
+                player = null;
+                gameState = finishState;
+            }
             for (int i = 0; i < enemies.length; ++i) {
                 if (enemies[i] != null) {
                     if (enemies[i].alive == true && enemies[i].dying == false){
@@ -130,7 +138,9 @@ public class GamePanel extends JPanel implements Runnable {
         tileManager.draw(graphics2D);
 
         //Add entity to List
-        entities.add(player);
+        if (player != null){
+            entities.add(player);
+        }
 
         for (int i = 0; i < objects.length; ++i) {
             if (objects[i] != null) {

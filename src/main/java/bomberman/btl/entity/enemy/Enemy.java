@@ -28,6 +28,7 @@ public class Enemy extends Entity {
         boolean attackPlayer = gamePanel.collisionChecker.checkPlayer(this);
         if (attackPlayer) {
             System.out.println("Hit a player!");
+            gamePanel.player.dying = true;
         }
 
         if (collisionOn == false) {

@@ -7,6 +7,7 @@ import bomberman.btl.main.GamePanel;
 import bomberman.btl.input.KeyInput;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
     //Trang thai Power up
@@ -17,6 +18,8 @@ public class Player extends Entity {
 
     public int life = 3;
     KeyInput keyInput;
+    public BufferedImage dead1, dead2, dead3;
+    public int dyingcounter = 0;
 
     public Player(GamePanel gamePanel, KeyInput keyInput) {
         super(gamePanel);
@@ -34,6 +37,8 @@ public class Player extends Entity {
         solidAreaLeft = new Rectangle(0, 9, 18, 24);
         solidAreaRight = new Rectangle(9, 9, 18, 24);
 
+        dying = false;
+        alive = true;
 
         setDefaultValues();
         getPlayerImage();
@@ -58,9 +63,15 @@ public class Player extends Entity {
         right1 = setupImage("/player/player_right");
         right2 = setupImage("/player/player_right_1");
         right3 = setupImage("/player/player_right_2");
+        dead1 = setupImage("/player/player_dead1");
+        dead2 = setupImage("/player/player_dead2");
+        dead3 = setupImage("/player/player_dead3");
     }
 
     public void update() {
+        if (dying == true) {
+
+        }
         if (keyInput.upPressed || keyInput.downPressed || keyInput.leftPressed || keyInput.rightPressed || keyInput.bombPressed) {
             if (keyInput.upPressed) {
                 direction = "up";
@@ -149,7 +160,7 @@ public class Player extends Entity {
     public void interactEnemy(int index) {
         if (index != 999) {
             System.out.println("Hit a enemy!");
-            gamePanel.enemies[index].dying = true;
+            gamePanel.player.dying = true;
         }
     }
 
@@ -175,6 +186,86 @@ public class Player extends Entity {
             gamePanel.bombs[numBomb] = new Bomb(gamePanel, xBomb, yBomb, this);
             gamePanel.projectiles.add(gamePanel.bombs[numBomb]);
             numBomb--;
+        }
+    }
+
+    public void draw(Graphics2D graphics2D) {
+        try {
+            if (dying == true) {
+                dyingAnimation(graphics2D);
+            }
+            else{
+                BufferedImage image = null;
+                switch (direction) {
+                    case "up":
+                        if (spriteNum == 1) {
+                            image = up1;
+                        }
+                        if (spriteNum == 2) {
+                            image = up2;
+                        }
+                        if (spriteNum == 3) {
+                            image = up3;
+                        }
+                        break;
+                    case "down":
+                        if (spriteNum == 1) {
+                            image = down1;
+                        }
+                        if (spriteNum == 2) {
+                            image = down2;
+                        }
+                        if (spriteNum == 3) {
+                            image = down3;
+                        }
+                        break;
+                    case "left":
+                        if (spriteNum == 1) {
+                            image = left1;
+                        }
+                        if (spriteNum == 2) {
+                            image = left2;
+                        }
+                        if (spriteNum == 3) {
+                            image = left3;
+                        }
+                        break;
+                    case "right":
+                        if (spriteNum == 1) {
+                            image = right1;
+                        }
+                        if (spriteNum == 2) {
+                            image = right2;
+                        }
+                        if (spriteNum == 3) {
+                            image = right3;
+                        }
+                        break;
+                }
+                graphics2D.drawImage(image, worldX, worldY, null);
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void dyingAnimation(Graphics2D graphics2D) {
+        dyingcounter++;
+        int i = 20;
+        System.out.println(dyingcounter);
+        if (dyingcounter <= i) {
+            graphics2D.drawImage(dead1, worldX, worldY, null);
+        }
+        if (dyingcounter > i && dyingcounter <= 2 * i) {
+            graphics2D.drawImage(dead2, worldX, worldY, null);
+        }
+        if (dyingcounter > 2 * i && dyingcounter <= 3 * i) {
+            graphics2D.drawImage(dead3, worldX, worldY, null);
+        }
+        if (dyingcounter > 3*i){
+            dying = false;
+            alive = false;
         }
     }
 }
