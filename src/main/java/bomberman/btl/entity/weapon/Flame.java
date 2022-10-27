@@ -6,7 +6,7 @@ import bomberman.btl.main.GamePanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Flame extends Projectile{
+public class Flame extends Projectile {
     public static int lifeTime;
 
     public BufferedImage image1, image2, image3;
@@ -15,10 +15,12 @@ public class Flame extends Projectile{
     public BufferedImage upLast1, upLast2, upLast3;
     public BufferedImage downLast1, downLast2, downLast3;
 
+    public int scale = 1;
+
     //Chua no
     public boolean alive;
 
-    public Flame(GamePanel gamePanel, int x, int y, Entity user) {
+    public Flame(GamePanel gamePanel, int x, int y, Entity user, int scale) {
         super(gamePanel, x, y, user);
         name = "flame";
         alive = true;
@@ -26,6 +28,7 @@ public class Flame extends Projectile{
         lifeTime = 0;
         collision = true;
         solidArea = new Rectangle(3, 6, 42, 39);
+        this.scale = scale;
         getImage();
     }
 
@@ -85,31 +88,64 @@ public class Flame extends Projectile{
         }
     }
 
+    public void drawFlameEdge(Graphics graphics2D, BufferedImage image1, BufferedImage image2, int scale, int dirx, int diry) {
+        for (int i = 1; i <= scale; ++i) {
+            int nx = worldX + i * dirx * gamePanel.tileSize;
+            int ny = worldY + i  * diry * gamePanel.tileSize;
+            int nrow = ny / gamePanel.tileSize;
+            int ncol = nx / gamePanel.tileSize;
+            //System.out.println(nrow + " " + ncol + " : " + gamePanel.tileManager.mapTile[nrow][ncol]);
+            if (gamePanel.tileManager.mapTile[nrow][ncol] == '#' || gamePanel.tileManager.mapTile[nrow][ncol] == '*'){
+                return;
+            }
+            if (i != scale){
+                graphics2D.drawImage(image1, nx, ny, null);
+            }
+            else{
+                graphics2D.drawImage(image2, nx, ny, null);
+
+            }
+        }
+    }
+
     public void draw(Graphics2D graphics2D) {
         BufferedImage image = null;
+
         if (spriteNum == 1) {
             graphics2D.drawImage(image1, worldX, worldY, null);
             //graphics2D.drawImage(left1, worldX - gamePanel.tileSize, worldY, null);
-            graphics2D.drawImage(leftLast1, worldX - gamePanel.tileSize, worldY, null);
-            graphics2D.drawImage(rightLast1, worldX + gamePanel.tileSize, worldY, null);
-            graphics2D.drawImage(upLast1, worldX, worldY - gamePanel.tileSize, null);
-            graphics2D.drawImage(downLast1, worldX, worldY + gamePanel.tileSize, null);
+            drawFlameEdge(graphics2D, left1, leftLast1, scale, -1, 0);
+            drawFlameEdge(graphics2D, left1, rightLast1, scale, 1, 0);
+            drawFlameEdge(graphics2D, up1, upLast1, scale, 0, -1);
+            drawFlameEdge(graphics2D, up1, downLast1, scale, 0, 1);
+//            graphics2D.drawImage(rightLast1, worldX + gamePanel.tileSize, worldY, null);
+//            graphics2D.drawImage(upLast1, worldX, worldY - gamePanel.tileSize, null);
+//            graphics2D.drawImage(downLast1, worldX, worldY + gamePanel.tileSize, null);
         }
         if (spriteNum == 2) {
             graphics2D.drawImage(image2, worldX, worldY, null);
             //graphics2D.drawImage(left2, worldX - gamePanel.tileSize, worldY, null);
-            graphics2D.drawImage(leftLast2, worldX - gamePanel.tileSize, worldY, null);
-            graphics2D.drawImage(rightLast2, worldX + gamePanel.tileSize, worldY, null);
-            graphics2D.drawImage(upLast2, worldX, worldY - gamePanel.tileSize, null);
-            graphics2D.drawImage(downLast2, worldX, worldY + gamePanel.tileSize, null);
+//            graphics2D.drawImage(leftLast2, worldX - gamePanel.tileSize, worldY, null);
+//            graphics2D.drawImage(rightLast2, worldX + gamePanel.tileSize, worldY, null);
+//            graphics2D.drawImage(upLast2, worldX, worldY - gamePanel.tileSize, null);
+//            graphics2D.drawImage(downLast2, worldX, worldY + gamePanel.tileSize, null);
+
+            drawFlameEdge(graphics2D, left2, leftLast2, scale, -1, 0);
+            drawFlameEdge(graphics2D, left2, rightLast2, scale, 1, 0);
+            drawFlameEdge(graphics2D, up2, upLast2, scale, 0, -1);
+            drawFlameEdge(graphics2D, up2, downLast2, scale, 0, 1);
         }
         if (spriteNum == 3) {
             graphics2D.drawImage(image3, worldX, worldY, null);
-            //graphics2D.drawImage(left3, worldX - gamePanel.tileSize, worldY, null);
-            graphics2D.drawImage(leftLast3, worldX - gamePanel.tileSize, worldY, null);
-            graphics2D.drawImage(rightLast3, worldX + gamePanel.tileSize, worldY, null);
-            graphics2D.drawImage(upLast3, worldX, worldY - gamePanel.tileSize, null);
-            graphics2D.drawImage(downLast3, worldX, worldY + gamePanel.tileSize, null);
+//            graphics2D.drawImage(leftLast3, worldX - gamePanel.tileSize, worldY, null);
+//            graphics2D.drawImage(rightLast3, worldX + gamePanel.tileSize, worldY, null);
+//            graphics2D.drawImage(upLast3, worldX, worldY - gamePanel.tileSize, null);
+//            graphics2D.drawImage(downLast3, worldX, worldY + gamePanel.tileSize, null);
+
+            drawFlameEdge(graphics2D, left3, leftLast3, scale, -1, 0);
+            drawFlameEdge(graphics2D, left3, rightLast3, scale, 1, 0);
+            drawFlameEdge(graphics2D, up3, upLast3, scale, 0, -1);
+            drawFlameEdge(graphics2D, up3, downLast3, scale, 0, 1);
         }
     }
 }

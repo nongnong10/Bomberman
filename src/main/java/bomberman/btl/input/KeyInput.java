@@ -34,7 +34,6 @@ public class KeyInput implements KeyListener {
                 rightPressed = true;
                 break;
             case KeyEvent.VK_SPACE:
-                System.out.println("Place a bomb!");
                 bombPressed = true;
                 break;
             case KeyEvent.VK_P:

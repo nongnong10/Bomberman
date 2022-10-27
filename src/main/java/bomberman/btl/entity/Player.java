@@ -152,7 +152,23 @@ public class Player extends Entity {
     public void placeBomb() {
         if (numBomb > 0){
             System.out.println(numBomb + " : " + worldX + " " + worldY);
-            gamePanel.bombs[numBomb] = new Bomb(gamePanel, worldX, worldY, this);
+            int nrow = worldY / gamePanel.tileSize;
+            int ncol = worldX / gamePanel.tileSize;
+
+            int xBomb, yBomb;
+            if (worldX % gamePanel.tileSize >= (solidArea.x + solidArea.width)/3*2){
+                xBomb = (ncol+1) * gamePanel.tileSize;
+            }
+            else{
+                xBomb = ncol * gamePanel.tileSize;
+            }
+            if (worldY % gamePanel.tileSize >= (solidArea.y + solidArea.height)/3*2){
+                yBomb = (nrow+1) * gamePanel.tileSize;
+            }
+            else{
+                yBomb = nrow * gamePanel.tileSize;
+            }
+            gamePanel.bombs[numBomb] = new Bomb(gamePanel, xBomb, yBomb, this);
             gamePanel.projectiles.add(gamePanel.bombs[numBomb]);
             numBomb--;
         }

@@ -46,7 +46,6 @@ public class Ballom extends Enemy {
             } else {
                 direction = "right";
             }
-            System.out.println(direction);
             actionLockCounter = 0;
         }
     }
