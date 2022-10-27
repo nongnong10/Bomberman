@@ -36,6 +36,7 @@ public class Bomb extends Projectile {
         if (lifeTime >= 120) {
             alive = false;
             lifeTime = 0;
+            gamePanel.flame.add(new Flame(gamePanel,worldX,worldY,user));
         }
     }
 

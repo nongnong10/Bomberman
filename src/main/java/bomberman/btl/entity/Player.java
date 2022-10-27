@@ -150,17 +150,17 @@ public class Player extends Entity {
     }
 
     public void placeBomb() {
-//        if (numBomb > 0){
-//            System.out.println(numBomb + " : " + worldX + " " + worldY);
-//            gamePanel.bombs[numBomb] = new Bomb(gamePanel, worldX, worldY, this);
-//            gamePanel.projectiles.add(gamePanel.bombs[numBomb]);
-//            numBomb--;
-//        }
         if (numBomb > 0){
             System.out.println(numBomb + " : " + worldX + " " + worldY);
-            gamePanel.flames[numBomb] = new Flame(gamePanel, worldX, worldY, this);
-            gamePanel.flame.add(gamePanel.flames[numBomb]);
+            gamePanel.bombs[numBomb] = new Bomb(gamePanel, worldX, worldY, this);
+            gamePanel.projectiles.add(gamePanel.bombs[numBomb]);
             numBomb--;
         }
+//        if (numBomb > 0){
+//            System.out.println(numBomb + " : " + worldX + " " + worldY);
+//            gamePanel.flames[numBomb] = new Flame(gamePanel, worldX, worldY, this);
+//            gamePanel.flame.add(gamePanel.flames[numBomb]);
+//            numBomb--;
+//        }
     }
 }
