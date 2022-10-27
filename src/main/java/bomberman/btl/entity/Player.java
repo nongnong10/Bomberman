@@ -32,6 +32,7 @@ public class Player extends Entity {
         solidAreaLeft = new Rectangle(0, 9, 18, 24);
         solidAreaRight = new Rectangle(9, 9, 18, 24);
 
+
         setDefaultValues();
         getPlayerImage();
     }
@@ -151,7 +152,6 @@ public class Player extends Entity {
 
     public void placeBomb() {
         if (numBomb > 0){
-            System.out.println(numBomb + " : " + worldX + " " + worldY);
             int nrow = worldY / gamePanel.tileSize;
             int ncol = worldX / gamePanel.tileSize;
 
@@ -168,15 +168,10 @@ public class Player extends Entity {
             else{
                 yBomb = nrow * gamePanel.tileSize;
             }
+            System.out.println(numBomb + " : " + xBomb/ gamePanel.tileSize + " " + ncol/gamePanel.tileSize);
             gamePanel.bombs[numBomb] = new Bomb(gamePanel, xBomb, yBomb, this);
             gamePanel.projectiles.add(gamePanel.bombs[numBomb]);
             numBomb--;
         }
-//        if (numBomb > 0){
-//            System.out.println(numBomb + " : " + worldX + " " + worldY);
-//            gamePanel.flames[numBomb] = new Flame(gamePanel, worldX, worldY, this);
-//            gamePanel.flame.add(gamePanel.flames[numBomb]);
-//            numBomb--;
-//        }
     }
 }

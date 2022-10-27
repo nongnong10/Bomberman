@@ -7,8 +7,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Bomb extends Projectile {
-    //Thoi gian cho no
-    public static int lifeTime;
 
     //Chua no
     public boolean alive;
@@ -16,9 +14,6 @@ public class Bomb extends Projectile {
     public Bomb(GamePanel gamePanel, int x, int y, Entity user) {
         super(gamePanel, x, y, user);
         name = "bomb";
-        alive = true;
-        direction = "down";
-        lifeTime = 0;
         collision = true;
         solidArea = new Rectangle(3, 6, 42, 39);
         getImage();
@@ -32,11 +27,11 @@ public class Bomb extends Projectile {
 
     @Override
     public void setAction() {
-        lifeTime++;
+        super.lifeTime++;
         if (lifeTime >= 120) {
-            alive = false;
-            lifeTime = 0;
-            gamePanel.flame.add(new Flame(gamePanel,worldX,worldY,user,1));
+            super.alive = false;
+            super.lifeTime = 0;
+            gamePanel.projectiles.add(new Flame(gamePanel,worldX,worldY,user,1));
         }
     }
 
@@ -55,7 +50,7 @@ public class Bomb extends Projectile {
         setMove();
 
         spriteCounter++;
-        if (spriteCounter > 10) {
+        if (spriteCounter > 15) {
             if (spriteNum == 1) spriteNum = 2;
             else if (spriteNum == 2) spriteNum = 3;
             else if (spriteNum == 3) spriteNum = 1;

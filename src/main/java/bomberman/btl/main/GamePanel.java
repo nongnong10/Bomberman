@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int gameState;
     public int FPS = 60;
     public ArrayList<Entity> entities = new ArrayList<>();
-    public ArrayList<Bomb> projectiles = new ArrayList<>();
+    public ArrayList<Projectile> projectiles = new ArrayList<>();
     public ArrayList<Flame> flame = new ArrayList<>();
     //Once start it, it keep program running until you stop it
     Thread gameThread;
@@ -141,23 +141,12 @@ public class GamePanel extends JPanel implements Runnable {
                 if (projectiles.get(i).alive == true){
                     projectiles.get(i).update();
                 }
-                if (projectiles.get(i).alive == false){
-                    bombs[player.numBomb+1] = null;
+                if (projectiles.get(i).alive == false) {
+                    bombs[player.numBomb + 1] = null;
+                    if (projectiles.get(i).name == "flame"){
+                        player.numBomb = 1;
+                    }
                     projectiles.remove(i);
-                    player.numBomb = 1;
-                }
-            }
-        }
-
-        for (int i = 0; i < flame.size(); ++i) {
-            if (flame.get(i) != null) {
-                if (flame.get(i).alive == true){
-                    flame.get(i).update();
-                }
-                if (flame.get(i).alive == false){
-                    flames[player.numBomb+1] = null;
-                    flame.remove(i);
-                    player.numBomb = 1;
                 }
             }
         }
@@ -181,14 +170,14 @@ public class GamePanel extends JPanel implements Runnable {
         });
         //Draw entities
         for (int i = 0; i < entities.size(); ++i) {
-            //System.out.println(i + " : " + entities.get(i).name);
             entities.get(i).draw(graphics2D);
         }
         for (int i = 0; i < projectiles.size(); ++i) {
             //System.out.println(i + " : " + projectiles.get(i).name);
             projectiles.get(i).draw(graphics2D);
         }
-        for (int i=0; i<flame.size(); ++i){
+        for (int i = 0; i < flame.size(); ++i) {
+            //System.out.println(i + " : " + projectiles.get(i).name);
             flame.get(i).draw(graphics2D);
         }
         //Remove
