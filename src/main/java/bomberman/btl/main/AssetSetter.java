@@ -25,5 +25,17 @@ public class AssetSetter {
         gamePanel.enemies[0] = new Ballom(this.gamePanel);
         gamePanel.enemies[0].worldX = 4* gamePanel.tileSize;
         gamePanel.enemies[0].worldY = 1* gamePanel.tileSize;
+
+        gamePanel.enemies[1] = new Ballom(this.gamePanel);
+        gamePanel.enemies[1].worldX = 5* gamePanel.tileSize;
+        gamePanel.enemies[1].worldY = 1* gamePanel.tileSize;
+
+        gamePanel.enemies[2] = new Ballom(this.gamePanel);
+        gamePanel.enemies[2].worldX = 6* gamePanel.tileSize;
+        gamePanel.enemies[2].worldY = 1* gamePanel.tileSize;
+
+        gamePanel.enemies[3] = new Ballom(this.gamePanel);
+        gamePanel.enemies[3].worldX = 7* gamePanel.tileSize;
+        gamePanel.enemies[35].worldY = 1* gamePanel.tileSize;
     }
 }

@@ -17,9 +17,9 @@ public class Player extends Entity {
     public int numBomb = 1;
 
     public int life = 3;
-    KeyInput keyInput;
     public BufferedImage dead1, dead2, dead3;
     public int dyingcounter = 0;
+    KeyInput keyInput;
 
     public Player(GamePanel gamePanel, KeyInput keyInput) {
         super(gamePanel);
@@ -69,9 +69,6 @@ public class Player extends Entity {
     }
 
     public void update() {
-        if (dying == true) {
-
-        }
         if (keyInput.upPressed || keyInput.downPressed || keyInput.leftPressed || keyInput.rightPressed || keyInput.bombPressed) {
             if (keyInput.upPressed) {
                 direction = "up";
@@ -97,6 +94,9 @@ public class Player extends Entity {
             //check object collision
             int objInd = gamePanel.collisionChecker.checkObject(this, true);
             pickupObject(objInd);
+
+            //
+            //gamePanel.eventHandler.checkEvent();
 
             //check enemy collision
             int enemyInd = gamePanel.collisionChecker.checkEntity(this, gamePanel.enemies);
@@ -164,22 +164,26 @@ public class Player extends Entity {
         }
     }
 
+    public void damageEnemy(int index) {
+        if (index != 999) {
+            gamePanel.enemies[index].dying = true;
+        }
+    }
+
     public void placeBomb() {
-        if (numBomb > 0){
+        if (numBomb > 0) {
             int nrow = worldY / gamePanel.tileSize;
             int ncol = worldX / gamePanel.tileSize;
 
             int xBomb, yBomb;
-            if (worldX % gamePanel.tileSize >= (solidArea.x + solidArea.width)/3*2){
-                xBomb = (ncol+1) * gamePanel.tileSize;
-            }
-            else{
+            if (worldX % gamePanel.tileSize >= (solidArea.x + solidArea.width) / 3 * 2) {
+                xBomb = (ncol + 1) * gamePanel.tileSize;
+            } else {
                 xBomb = ncol * gamePanel.tileSize;
             }
-            if (worldY % gamePanel.tileSize >= (solidArea.y + solidArea.height)/3*2){
-                yBomb = (nrow+1) * gamePanel.tileSize;
-            }
-            else{
+            if (worldY % gamePanel.tileSize >= (solidArea.y + solidArea.height) / 3 * 2) {
+                yBomb = (nrow + 1) * gamePanel.tileSize;
+            } else {
                 yBomb = nrow * gamePanel.tileSize;
             }
             //System.out.println(numBomb + " : " + xBomb/ gamePanel.tileSize + " " + ncol/gamePanel.tileSize);
@@ -193,8 +197,7 @@ public class Player extends Entity {
         try {
             if (dying == true) {
                 dyingAnimation(graphics2D);
-            }
-            else{
+            } else {
                 BufferedImage image = null;
                 switch (direction) {
                     case "up":
@@ -263,7 +266,7 @@ public class Player extends Entity {
         if (dyingcounter > 2 * i && dyingcounter <= 3 * i) {
             graphics2D.drawImage(dead3, worldX, worldY, null);
         }
-        if (dyingcounter > 3*i){
+        if (dyingcounter > 3 * i) {
             dying = false;
             alive = false;
         }

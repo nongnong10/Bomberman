@@ -40,6 +40,8 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileManager = new TileManager(this);
     //collision checker
     public CollisionChecker collisionChecker = new CollisionChecker(this);
+    //event handler
+    public EventHandler eventHandler = new EventHandler(this);
     //object
     public Entity[] objects = new Entity[20];
     public Entity[] enemies = new Entity[20];
