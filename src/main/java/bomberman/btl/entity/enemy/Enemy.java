@@ -19,6 +19,15 @@ public class Enemy extends Entity {
         dying = false;
     }
 
+    public Enemy(GamePanel gamePanel, int col, int row) {
+        super(gamePanel);
+        this.name = "enemy";
+        alive = true;
+        dying = false;
+        worldX = col * gamePanel.tileSize;
+        worldY = row * gamePanel.tileSize;
+    }
+
     @Override
     public void setMove() {
         collisionOn = false;

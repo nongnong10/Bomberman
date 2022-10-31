@@ -9,11 +9,8 @@ import bomberman.btl.entity.Player;
 import bomberman.btl.tile.InteractiveTile;
 import bomberman.btl.tile.TileManager;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -48,7 +45,7 @@ public class GamePanel extends JPanel implements Runnable {
     //object
     public Entity[] objects = new Entity[20];
     public Entity[] enemies = new Entity[20];
-    public InteractiveTile[] interactiveTiles = new InteractiveTile[50];
+    public InteractiveTile[] interactiveTiles = new InteractiveTile[maxScreenCol * maxScreenRow];
     public Bomb[] bombs = new Bomb[10];
     public Flame[] flames = new Flame[10];
     //set object
@@ -74,9 +71,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
+        assetSetter.setInteractiveTiles();
         assetSetter.setObject();
         assetSetter.setEnemy();
-        assetSetter.setInteractiveTiles();
         gameState = playState;
     }
 
@@ -151,13 +148,6 @@ public class GamePanel extends JPanel implements Runnable {
         //Tile
         tileManager.draw(graphics2D);
 
-        //Interactive tiles
-        for (int i = 0; i < interactiveTiles.length; ++i) {
-            if (interactiveTiles[i] != null){
-                interactiveTiles[i].draw(graphics2D);
-            }
-        }
-
         //Add entity to List
         if (player != null) {
             entities.add(player);
@@ -193,25 +183,31 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         //Sort
-        Collections.sort(entities, new Comparator<Entity>() {
-            @Override
-            public int compare(Entity o1, Entity o2) {
-                int res = 0;
-                if (o1.name == o2.name) {
-                    res = Integer.compare(o1.worldY, o2.worldY);
-                } else {
-                    if (o1.name == "enemy") {
-                        res = 1;
-                    } else {
-                        res = -1;
-                    }
-                }
-                return res;
-            }
-        });
+//        Collections.sort(entities, new Comparator<Entity>() {
+//            @Override
+//            public int compare(Entity o1, Entity o2) {
+//                int res = 0;
+//                if (o1.name == o2.name) {
+//                    res = Integer.compare(o1.worldY, o2.worldY);
+//                } else {
+//                    if (o1.name == "enemy") {
+//                        res = 1;
+//                    } else {
+//                        res = -1;
+//                    }
+//                }
+//                return res;
+//            }
+//        });
         //Draw entities
         for (int i = 0; i < entities.size(); ++i) {
             entities.get(i).draw(graphics2D);
+        }
+        //Interactive tiles
+        for (int i = 0; i < interactiveTiles.length; ++i) {
+            if (interactiveTiles[i] != null){
+                interactiveTiles[i].draw(graphics2D);
+            }
         }
         for (int i = 0; i < projectiles.size(); ++i) {
             //System.out.println(i + " : " + projectiles.get(i).name);

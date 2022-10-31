@@ -46,6 +46,8 @@ public class UI {
 
 
             if (gamePanel.player.wallpass == true) {
+                System.out.println(1);
+//                graphics2D.drawImage(wallpassImg, 0,0, gamePanel.tileSize, gamePanel.tileSize, null);
                 graphics2D.drawImage(wallpassImg, (gamePanel.maxScreenCol - 1) * gamePanel.tileSize,
                         (gamePanel.maxScreenRow) * gamePanel.tileSize + 7, gamePanel.tileSize / 3 * 2, gamePanel.tileSize / 3 * 2, null);
             }

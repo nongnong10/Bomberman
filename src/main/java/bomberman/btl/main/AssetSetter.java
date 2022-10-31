@@ -13,35 +13,39 @@ public class AssetSetter {
     }
 
     public void setObject() {
-        gamePanel.objects[0] = new Door(this.gamePanel);
-        gamePanel.objects[0].worldX = 1 * gamePanel.tileSize;
-        gamePanel.objects[0].worldY = 3 * gamePanel.tileSize;
-
-        gamePanel.objects[1] = new Wallpass(this.gamePanel);
-        gamePanel.objects[1].worldX = 1 * gamePanel.tileSize;
-        gamePanel.objects[1].worldY = 5 * gamePanel.tileSize;
+        int numObj = -1;
+        for (int i = 0; i < gamePanel.maxScreenRow; ++i) {
+            for (int j = 0; j < gamePanel.maxScreenCol; ++j) {
+                if (gamePanel.tileManager.mapTile[i][j] == 'D') {
+                    gamePanel.objects[++numObj] = new Door(this.gamePanel, j, i);
+                }
+                if (gamePanel.tileManager.mapTile[i][j] == 'W') {
+                    gamePanel.objects[++numObj] = new Wallpass(this.gamePanel, j, i);
+                }
+            }
+        }
     }
 
     public void setEnemy() {
-        gamePanel.enemies[0] = new Ballom(this.gamePanel);
-        gamePanel.enemies[0].worldX = 9 * gamePanel.tileSize;
-        gamePanel.enemies[0].worldY = 1 * gamePanel.tileSize;
-
-//        gamePanel.enemies[1] = new Ballom(this.gamePanel);
-//        gamePanel.enemies[1].worldX = 5 * gamePanel.tileSize;
-//        gamePanel.enemies[1].worldY = 1 * gamePanel.tileSize;
-//
-//        gamePanel.enemies[2] = new Ballom(this.gamePanel);
-//        gamePanel.enemies[2].worldX = 6 * gamePanel.tileSize;
-//        gamePanel.enemies[2].worldY = 1 * gamePanel.tileSize;
-//
-//        gamePanel.enemies[3] = new Ballom(this.gamePanel);
-//        gamePanel.enemies[3].worldX = 7 * gamePanel.tileSize;
-//        gamePanel.enemies[3].worldY = 1 * gamePanel.tileSize;
+        int numEnemy = -1;
+        for (int i = 0; i < gamePanel.maxScreenRow; ++i) {
+            for (int j = 0; j < gamePanel.maxScreenCol; ++j) {
+                if (gamePanel.tileManager.mapTile[i][j] == '1') {
+                    gamePanel.enemies[++numEnemy] = new Ballom(this.gamePanel, j, i);
+                }
+            }
+        }
     }
 
     public void setInteractiveTiles() {
-        gamePanel.interactiveTiles[0] = new Brick(this.gamePanel,5,1);
-        gamePanel.interactiveTiles[1] = new Brick(this.gamePanel,6,1);
+        int numBrick = -1;
+        for (int i = 0; i < gamePanel.maxScreenRow; ++i) {
+            for (int j = 0; j < gamePanel.maxScreenCol; ++j) {
+                char tmp = gamePanel.tileManager.mapTile[i][j];
+                if (tmp == '*' || tmp == 'D' || tmp == 'W') {
+                    gamePanel.interactiveTiles[++numBrick] = new Brick(this.gamePanel, j, i);
+                }
+            }
+        }
     }
 }

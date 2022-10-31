@@ -79,7 +79,7 @@ public class Flame extends Projectile {
             int enemyInd = gamePanel.collisionChecker.checkEntity(this, gamePanel.enemies);
             gamePanel.player.damageEnemy(enemyInd);
 
-            //Attack Player
+            //Attack Player8
             boolean attackPlayer = gamePanel.collisionChecker.checkPlayer(this);
             if (attackPlayer) {
                 gamePanel.player.interactEnemy(1);

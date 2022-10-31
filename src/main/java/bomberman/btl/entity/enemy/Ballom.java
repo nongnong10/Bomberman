@@ -15,6 +15,14 @@ public class Ballom extends Enemy {
         getImage();
     }
 
+    public Ballom(GamePanel gamePanel, int col, int row) {
+        super(gamePanel, col, row);
+        direction = "down";
+        speed = 1;
+        solidArea = new Rectangle(3, 0, 42, 42);
+        getImage();
+    }
+
     public void getImage() {
         up1 = setupImage("/enemy/ballom/balloom_left1");
         up2 = setupImage("/enemy/ballom/balloom_left2");

@@ -27,43 +27,9 @@ public class TileManager {
         loadMap();
     }
 
-    public void breakAnimation(Graphics2D graphics2D, Tile obj, int row, int col) {
-        obj.dyingcounter++;
-        int i = 20;
-        int worldX = col * gamePanel.tileSize;
-        int worldY = row * gamePanel.tileSize;
-        //System.out.println(obj.dyingcounter);
-        if (obj.dyingcounter <= i) {
-            graphics2D.drawImage(dead1, worldX, worldY, null);
-        }
-        if (obj.dyingcounter > i && obj.dyingcounter <= 2 * i) {
-            graphics2D.drawImage(dead2, worldX, worldY, null);
-        }
-        if (obj.dyingcounter > 2 * i && obj.dyingcounter <= 3 * i) {
-            graphics2D.drawImage(dead3, worldX, worldY, null);
-        }
-        if (obj.dyingcounter > 3 * i) {
-            mapTileNum[row][col] = 0;
-        }
-    }
-
-
     public void getTileImage() {
         setupTile(0, "grass", false, false);
         setupTile(1, "wall", true, false);
-    }
-
-    public BufferedImage setupImage(String imgPath) {
-        UtilityTool utilityTool = new UtilityTool();
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(getClass().getResourceAsStream("/img" + imgPath + ".png"));
-            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return image;
     }
 
     public void setupTile(int index, String imgPath, boolean collision, boolean breakable) {
@@ -81,10 +47,10 @@ public class TileManager {
 
     public void loadMap() {
         try {
-            File myObj = new File("C:\\Users\\HH\\Desktop\\Study\\Code\\btl\\src\\main\\resources\\map\\map4.txt");
+            File myObj = new File("C:\\Users\\HH\\Desktop\\Study\\Code\\btl\\src\\main\\resources\\map\\map3.txt");
             Scanner myReader = new Scanner(myObj);
             int row = 0;
-            while (myReader.hasNextLine()) {
+            while (row < gamePanel.maxScreenRow) {
                 String data = myReader.nextLine();
                 for (int col = 0; col < gamePanel.maxScreenCol; ++col) {
                     mapTile[row][col] = data.charAt(col);
