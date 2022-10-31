@@ -5,6 +5,7 @@ import bomberman.btl.main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Scanner;
 
@@ -15,6 +16,8 @@ public class TileManager {
     public char[][] mapTile;
     public int[][] mapTileNum;
 
+    public BufferedImage dead1, dead2, dead3;
+
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         tile = new Tile[50];
@@ -24,43 +27,71 @@ public class TileManager {
         loadMap();
     }
 
-    public void getTileImage() {
-        setupTile(0, "grass", false);
-        setupTile(1, "wall", true);
-        setupTile(2, "brick", true);
+    public void breakAnimation(Graphics2D graphics2D, Tile obj, int row, int col) {
+        obj.dyingcounter++;
+        int i = 20;
+        int worldX = col * gamePanel.tileSize;
+        int worldY = row * gamePanel.tileSize;
+        //System.out.println(obj.dyingcounter);
+        if (obj.dyingcounter <= i) {
+            graphics2D.drawImage(dead1, worldX, worldY, null);
+        }
+        if (obj.dyingcounter > i && obj.dyingcounter <= 2 * i) {
+            graphics2D.drawImage(dead2, worldX, worldY, null);
+        }
+        if (obj.dyingcounter > 2 * i && obj.dyingcounter <= 3 * i) {
+            graphics2D.drawImage(dead3, worldX, worldY, null);
+        }
+        if (obj.dyingcounter > 3 * i) {
+            mapTileNum[row][col] = 0;
+        }
     }
 
-    public void setupTile(int index, String imgPath, boolean collision) {
+
+    public void getTileImage() {
+        setupTile(0, "grass", false, false);
+        setupTile(1, "wall", true, false);
+    }
+
+    public BufferedImage setupImage(String imgPath) {
+        UtilityTool utilityTool = new UtilityTool();
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(getClass().getResourceAsStream("/img" + imgPath + ".png"));
+            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
+    }
+
+    public void setupTile(int index, String imgPath, boolean collision, boolean breakable) {
         UtilityTool utilityTool = new UtilityTool();
         try {
             tile[index] = new Tile();
             tile[index].image = ImageIO.read(getClass().getResourceAsStream("/img/tile/" + imgPath + ".png"));
             tile[index].image = utilityTool.scaleImage(tile[index].image, gamePanel.tileSize, gamePanel.tileSize);
             tile[index].collision = collision;
-        } catch (IOException e){
+            tile[index].breakable = breakable;
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void loadMap() {
         try {
-            File myObj = new File("C:\\Users\\HH\\Desktop\\Study\\Code\\btl\\src\\main\\resources\\map\\map3.txt");
+            File myObj = new File("C:\\Users\\HH\\Desktop\\Study\\Code\\btl\\src\\main\\resources\\map\\map4.txt");
             Scanner myReader = new Scanner(myObj);
             int row = 0;
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 for (int col = 0; col < gamePanel.maxScreenCol; ++col) {
                     mapTile[row][col] = data.charAt(col);
-                    switch (mapTile[row][col]) {
-                        case '#':
-                            mapTileNum[row][col] = 1;
-                            break;
-                        case '.':
-                            mapTileNum[row][col] = 0;
-                            break;
-                        case '*':
-                            mapTileNum[row][col] = 2;
-                            break;
+                    if (mapTile[row][col] == '#') {
+                        mapTileNum[row][col] = 1;
+                    } else {
+                        mapTileNum[row][col] = 0;
                     }
                 }
                 row++;

@@ -10,9 +10,11 @@ public class Bomb extends Projectile {
 
     //Chua no
     public boolean alive;
+    public int scale = 1;
 
-    public Bomb(GamePanel gamePanel, int x, int y, Entity user) {
+    public Bomb(GamePanel gamePanel, int x, int y, Entity user, int scale) {
         super(gamePanel, x, y, user);
+        this.scale = scale;
         name = "bomb";
         collision = true;
         solidArea = new Rectangle(3, 6, 42, 39);
@@ -31,7 +33,7 @@ public class Bomb extends Projectile {
         if (lifeTime >= 120) {
             super.alive = false;
             super.lifeTime = 0;
-            gamePanel.projectiles.add(new Flame(gamePanel,worldX,worldY,user,2));
+            gamePanel.projectiles.add(new Flame(gamePanel,worldX,worldY,user,scale));
         }
     }
 

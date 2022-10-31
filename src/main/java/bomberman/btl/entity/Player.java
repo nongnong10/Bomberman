@@ -91,11 +91,14 @@ public class Player extends Entity {
                 timer++;
             }
 
+            //check interactive tile collision
+            int tileInd = gamePanel.collisionChecker.checkEntity(this, gamePanel.interactiveTiles);
+//            System.out.println(tileInd);
+
             //check object collision
             int objInd = gamePanel.collisionChecker.checkObject(this, true);
             pickupObject(objInd);
 
-            //
             //gamePanel.eventHandler.checkEvent();
 
             //check enemy collision
@@ -170,6 +173,12 @@ public class Player extends Entity {
         }
     }
 
+    public void damageTile(int index) {
+        if (index != 999) {
+            gamePanel.interactiveTiles[index].dying = true;
+        }
+    }
+
     public void placeBomb() {
         if (numBomb > 0) {
             int nrow = worldY / gamePanel.tileSize;
@@ -187,7 +196,7 @@ public class Player extends Entity {
                 yBomb = nrow * gamePanel.tileSize;
             }
             //System.out.println(numBomb + " : " + xBomb/ gamePanel.tileSize + " " + ncol/gamePanel.tileSize);
-            gamePanel.bombs[numBomb] = new Bomb(gamePanel, xBomb, yBomb, this);
+            gamePanel.bombs[numBomb] = new Bomb(gamePanel, xBomb, yBomb, this, 2);
             gamePanel.projectiles.add(gamePanel.bombs[numBomb]);
             numBomb--;
         }

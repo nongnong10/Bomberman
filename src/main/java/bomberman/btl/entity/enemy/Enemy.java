@@ -25,6 +25,7 @@ public class Enemy extends Entity {
         gamePanel.collisionChecker.checkTileEntity(this);
         gamePanel.collisionChecker.checkObject(this, false);
         gamePanel.collisionChecker.checkEntity(this, gamePanel.bombs);
+        gamePanel.collisionChecker.checkEntity(this, gamePanel.interactiveTiles);
         boolean attackPlayer = gamePanel.collisionChecker.checkPlayer(this);
         if (attackPlayer) {
             System.out.println("Hit a player!");

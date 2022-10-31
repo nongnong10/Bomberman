@@ -15,6 +15,11 @@ public class Flame extends Projectile {
     public BufferedImage downLast1, downLast2, downLast3;
     public int defaultX, defaultY;
 
+    //left, right, up, down
+    public int[] dirX = {-1, 1, 0, 0};
+    public int[] dirY = {0, 0, -1, 1};
+    public int[] limit = {0, 0, 0, 0};
+
     public int scale = 1;
 
     //Chua no
@@ -57,15 +62,16 @@ public class Flame extends Projectile {
         downLast3 = setupImage("/bomb/explosion_vertical_down_last2");
     }
 
-    public void updateEdge(int scale, int dirx, int diry) {
+    public void updateEdge(int scale, int dir) {
         for (int i = 1; i <= scale; ++i) {
-            int nx = worldX + i * dirx * gamePanel.tileSize;
-            int ny = worldY + i * diry * gamePanel.tileSize;
+            int nx = worldX + i * dirX[dir] * gamePanel.tileSize;
+            int ny = worldY + i * dirY[dir] * gamePanel.tileSize;
             int nrow = ny / gamePanel.tileSize;
             int ncol = nx / gamePanel.tileSize;
-            if (gamePanel.tileManager.mapTile[nrow][ncol] == '#' || gamePanel.tileManager.mapTile[nrow][ncol] == '*') {
+            if (gamePanel.tileManager.mapTile[nrow][ncol] == '#') {
                 return;
             }
+            limit[dir] = i;
             this.worldX = nx;
             this.worldY = ny;
 
@@ -75,11 +81,20 @@ public class Flame extends Projectile {
 
             //Attack Player
             boolean attackPlayer = gamePanel.collisionChecker.checkPlayer(this);
-            if (attackPlayer){
+            if (attackPlayer) {
                 gamePanel.player.interactEnemy(1);
             }
+
+            //Break brick
+            int brickInd = gamePanel.collisionChecker.checkEntity(this, gamePanel.interactiveTiles);
+            gamePanel.player.damageTile(brickInd);
+
             this.worldX = defaultX;
             this.worldY = defaultY;
+
+            if (brickInd != 999) {
+                break;
+            }
         }
     }
 
@@ -89,10 +104,26 @@ public class Flame extends Projectile {
 
         setMove();
 
-        updateEdge(scale, -1, 0);
-        updateEdge(scale, 1, 0);
-        updateEdge(scale, 0, -1);
-        updateEdge(scale, 0, 1);
+        //Attack Enemies
+        int enemyInd = gamePanel.collisionChecker.checkEntity(this, gamePanel.enemies);
+        gamePanel.player.damageEnemy(enemyInd);
+
+        //Attack Player
+        boolean attackPlayer = gamePanel.collisionChecker.checkPlayer(this);
+        if (attackPlayer) {
+            gamePanel.player.interactEnemy(1);
+        }
+
+        //Break brick
+        int brickInd = gamePanel.collisionChecker.checkEntity(this, gamePanel.interactiveTiles);
+        gamePanel.player.damageTile(brickInd);
+
+        for (int i = 0; i < 4; ++i) {
+            updateEdge(scale, i);
+        }
+
+        this.worldX = defaultX;
+        this.worldY = defaultY;
 
         spriteCounter++;
         if (spriteCounter > 15) {
@@ -103,47 +134,45 @@ public class Flame extends Projectile {
         }
     }
 
-    public void drawFlameEdge(Graphics graphics2D, BufferedImage image1, BufferedImage image2, int scale, int dirx, int diry) {
-        for (int i = 1; i <= scale; ++i) {
-            int nx = worldX + i * dirx * gamePanel.tileSize;
-            int ny = worldY + i * diry * gamePanel.tileSize;
+    public void drawFlameEdge(Graphics graphics2D, BufferedImage image1, BufferedImage image2, int scale, int dir) {
+        for (int i = 1; i <= limit[dir]; ++i) {
+            int nx = worldX + i * dirX[dir] * gamePanel.tileSize;
+            int ny = worldY + i * dirY[dir] * gamePanel.tileSize;
             int nrow = ny / gamePanel.tileSize;
             int ncol = nx / gamePanel.tileSize;
-            if (gamePanel.tileManager.mapTile[nrow][ncol] == '#' || gamePanel.tileManager.mapTile[nrow][ncol] == '*') {
+            if (gamePanel.tileManager.mapTile[nrow][ncol] == '#') {
                 return;
             }
+
             if (i != scale) {
                 graphics2D.drawImage(image1, nx, ny, null);
             } else {
                 graphics2D.drawImage(image2, nx, ny, null);
-
             }
         }
     }
 
     public void draw(Graphics2D graphics2D) {
-        BufferedImage image = null;
-
         if (spriteNum == 1) {
             graphics2D.drawImage(image1, worldX, worldY, null);
-            drawFlameEdge(graphics2D, left1, leftLast1, scale, -1, 0);
-            drawFlameEdge(graphics2D, left1, rightLast1, scale, 1, 0);
-            drawFlameEdge(graphics2D, up1, upLast1, scale, 0, -1);
-            drawFlameEdge(graphics2D, up1, downLast1, scale, 0, 1);
+            drawFlameEdge(graphics2D, left1, leftLast1, scale, 0);
+            drawFlameEdge(graphics2D, left1, rightLast1, scale, 1);
+            drawFlameEdge(graphics2D, up1, upLast1, scale, 2);
+            drawFlameEdge(graphics2D, up1, downLast1, scale, 3);
         }
         if (spriteNum == 2) {
             graphics2D.drawImage(image2, worldX, worldY, null);
-            drawFlameEdge(graphics2D, left2, leftLast2, scale, -1, 0);
-            drawFlameEdge(graphics2D, left2, rightLast2, scale, 1, 0);
-            drawFlameEdge(graphics2D, up2, upLast2, scale, 0, -1);
-            drawFlameEdge(graphics2D, up2, downLast2, scale, 0, 1);
+            drawFlameEdge(graphics2D, left2, leftLast2, scale, 0);
+            drawFlameEdge(graphics2D, left2, rightLast2, scale, 1);
+            drawFlameEdge(graphics2D, up2, upLast2, scale, 2);
+            drawFlameEdge(graphics2D, up2, downLast2, scale, 3);
         }
         if (spriteNum == 3) {
             graphics2D.drawImage(image3, worldX, worldY, null);
-            drawFlameEdge(graphics2D, left3, leftLast3, scale, -1, 0);
-            drawFlameEdge(graphics2D, left3, rightLast3, scale, 1, 0);
-            drawFlameEdge(graphics2D, up3, upLast3, scale, 0, -1);
-            drawFlameEdge(graphics2D, up3, downLast3, scale, 0, 1);
+            drawFlameEdge(graphics2D, left3, leftLast3, scale, 0);
+            drawFlameEdge(graphics2D, left3, rightLast3, scale, 1);
+            drawFlameEdge(graphics2D, up3, upLast3, scale, 2);
+            drawFlameEdge(graphics2D, up3, downLast3, scale, 3);
         }
     }
 }

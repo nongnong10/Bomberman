@@ -254,7 +254,7 @@ public class CollisionChecker {
         return index;
     }
 
-    public boolean checkPlayer(Entity entity){
+    public boolean checkPlayer(Entity entity) {
         boolean contactPlayer = false;
         //Entity's solid area position
         entity.solidArea.x = entity.worldX + entity.solidArea.x;
