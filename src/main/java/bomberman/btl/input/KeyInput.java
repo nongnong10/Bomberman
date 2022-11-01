@@ -20,6 +20,13 @@ public class KeyInput implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
+        if (gamePanel.gameState == gamePanel.playState) {
+            playKeyState(keyCode);
+        } else if (gamePanel.gameState == gamePanel.pauseState) {
+            pauseKeyState(keyCode);
+        } else if (gamePanel.gameState == gamePanel.gameoverState) {
+            gameOverKeyState(keyCode);
+        }
         switch (keyCode) {
             case KeyEvent.VK_UP:
                 upPressed = true;
@@ -43,6 +50,73 @@ public class KeyInput implements KeyListener {
                     gamePanel.gameState = gamePanel.playState;
                 }
                 break;
+        }
+    }
+
+    public void playKeyState(int code) {
+        if (code == KeyEvent.VK_UP) {
+            upPressed = true;
+        }
+        if (code == KeyEvent.VK_DOWN) {
+            downPressed = true;
+        }
+        if (code == KeyEvent.VK_LEFT) {
+            leftPressed = true;
+        }
+        if (code == KeyEvent.VK_RIGHT) {
+            rightPressed = true;
+        }
+        if (code == KeyEvent.VK_SPACE) {
+            bombPressed = true;
+        }
+        if (code == KeyEvent.VK_P) {
+            gamePanel.gameState = gamePanel.pauseState;
+        }
+    }
+
+    public void pauseKeyState(int code) {
+        if (code == KeyEvent.VK_UP) {
+            upPressed = true;
+        }
+        if (code == KeyEvent.VK_DOWN) {
+            downPressed = true;
+        }
+        if (code == KeyEvent.VK_LEFT) {
+            leftPressed = true;
+        }
+        if (code == KeyEvent.VK_RIGHT) {
+            rightPressed = true;
+        }
+        if (code == KeyEvent.VK_SPACE) {
+            bombPressed = true;
+        }
+        if (code == KeyEvent.VK_P) {
+            gamePanel.gameState = gamePanel.playState;
+        }
+    }
+
+    public void gameOverKeyState(int code) {
+        if (code == KeyEvent.VK_UP) {
+            gamePanel.ui.commandNum--;
+            if (gamePanel.ui.commandNum < 0) {
+                gamePanel.ui.commandNum = 1;
+            }
+            upPressed = true;
+        }
+        if (code == KeyEvent.VK_DOWN) {
+            gamePanel.ui.commandNum++;
+            if (gamePanel.ui.commandNum > 1) {
+                gamePanel.ui.commandNum = 0;
+            }
+            downPressed = true;
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            if (gamePanel.ui.commandNum == 0) {
+                gamePanel.gameState = gamePanel.playState;
+                gamePanel.retry();
+            } else {
+//                gamePanel.gameState = gamePanel.playState;
+            }
         }
     }
 

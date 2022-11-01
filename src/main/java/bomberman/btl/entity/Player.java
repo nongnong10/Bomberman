@@ -143,10 +143,23 @@ public class Player extends Entity {
         }
     }
 
+    public void setDefaultPlayer(){
+        setDefaultPosition();
+    }
+
+    public void setDefaultPosition() {
+        worldX = gamePanel.tileSize;
+        worldY = gamePanel.tileSize;
+        direction = "down";
+    }
+
+    public void restoreLife(){
+        //life = maxLife;
+    }
+
     public void pickupObject(int index) {
         if (index != 999) {
             String objectName = gamePanel.objects[index].name;
-            System.out.println(objectName);
             switch (objectName) {
                 case "wallpass":
                     wallpass = true;
@@ -162,7 +175,6 @@ public class Player extends Entity {
 
     public void interactEnemy(int index) {
         if (index != 999) {
-            System.out.println("Hit a enemy!");
             gamePanel.player.dying = true;
         }
     }
@@ -278,6 +290,10 @@ public class Player extends Entity {
         if (dyingcounter > 3 * i) {
             dying = false;
             alive = false;
+            gamePanel.player = null;
+//            gamePanel.player.worldX = -gamePanel.tileSize;
+//            gamePanel.player.worldY = -gamePanel.tileSize;
+            gamePanel.gameState = gamePanel.gameoverState;
         }
     }
 }

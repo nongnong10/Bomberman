@@ -30,9 +30,11 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenWidth = maxScreenCol * tileSize; //21 * 48 = 1008
     public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 528
 
+    //GAME STATE
     public final int playState = 1;
     public final int pauseState = 2;
     public final int finishState = 3;
+    public final int gameoverState = 4;
     public KeyInput keyInput = new KeyInput(this);
     //set player position
     public Player player = new Player(this, keyInput);
@@ -70,10 +72,17 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
+    public void retry(){
+        player = new Player(this, keyInput);
+        player.setDefaultPlayer();
+        assetSetter.setAll();
+    }
+
     public void setupGame() {
-        assetSetter.setInteractiveTiles();
-        assetSetter.setObject();
-        assetSetter.setEnemy();
+        assetSetter.setAll();
+//        assetSetter.setInteractiveTiles();
+//        assetSetter.setObject();
+//        assetSetter.setEnemy();
         gameState = playState;
     }
 
@@ -107,14 +116,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         if (gameState == playState) {
-            if (player.alive == true && player.dying == false) {
-                player.update();
+            if (player != null){
+                if (player.alive == true && player.dying == false) {
+                    player.update();
+                }
+                if (player.alive == false){
+                    player = null;
+                }
             }
-            if (player.alive == false) {
-                this.ui.gameFinished = true;
-                player = null;
-                gameState = finishState;
-            }
+
             for (int i = 0; i < enemies.length; ++i) {
                 if (enemies[i] != null) {
                     if (enemies[i].alive == true && enemies[i].dying == false) {
@@ -139,6 +149,9 @@ public class GamePanel extends JPanel implements Runnable {
         }
         if (gameState == pauseState) {
             //pause = not update
+        }
+        if (gameState == gameoverState){
+
         }
     }
 

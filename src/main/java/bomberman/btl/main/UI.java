@@ -13,6 +13,7 @@ public class UI {
     public Font arial40;
     public BufferedImage wallpassImg;
     public boolean gameFinished = false;
+    public int commandNum = 0;
     DecimalFormat dformat = new DecimalFormat("#0.00");
 
     public UI(GamePanel gamePanel) {
@@ -31,32 +32,80 @@ public class UI {
     }
 
     public void draw(Graphics2D graphics2D) {
-        if (gameFinished == true) {
-            drawFinishedScreen(graphics2D);
-            gamePanel.gameThread = null;
-        } else {
+        //PLAY STATE
+        if (gamePanel.gameState == gamePanel.playState) {
             graphics2D.setFont(arial20);
             graphics2D.setColor(Color.white);
             graphics2D.drawString("Bomb = " + gamePanel.player.numBomb, 50, 557);
 
-            if (gamePanel.gameState == gamePanel.playState) {
-                playTime += (double) 1 / 60;
-            }
+            playTime += (double) 1 / 60;
             graphics2D.drawString("Time : " + dformat.format(playTime), 200, 557);
-
-
             if (gamePanel.player.wallpass == true) {
-                System.out.println(1);
-//                graphics2D.drawImage(wallpassImg, 0,0, gamePanel.tileSize, gamePanel.tileSize, null);
                 graphics2D.drawImage(wallpassImg, (gamePanel.maxScreenCol - 1) * gamePanel.tileSize,
                         (gamePanel.maxScreenRow) * gamePanel.tileSize + 7, gamePanel.tileSize / 3 * 2, gamePanel.tileSize / 3 * 2, null);
             }
         }
+
+        //PAUSED STATE
         if (gamePanel.gameState == gamePanel.pauseState) {
             drawPauseScreen(graphics2D);
+            graphics2D.setFont(arial20);
+            graphics2D.setColor(Color.white);
+            graphics2D.drawString("Bomb = " + gamePanel.player.numBomb, 50, 557);
+            graphics2D.drawString("Time : " + dformat.format(playTime), 200, 557);
+            if (gamePanel.player.wallpass == true) {
+                graphics2D.drawImage(wallpassImg, (gamePanel.maxScreenCol - 1) * gamePanel.tileSize,
+                        (gamePanel.maxScreenRow) * gamePanel.tileSize + 7, gamePanel.tileSize / 3 * 2, gamePanel.tileSize / 3 * 2, null);
+            }
+        }
+
+        //GAME OVER STATE
+        if (gamePanel.gameState == gamePanel.gameoverState){
+            drawGameOverScreen(graphics2D);
         }
     }
 
+    public void drawGameOverScreen(Graphics2D graphics2D){
+        //half transparent black
+        graphics2D.setColor(new Color(0, 0, 0, 150));
+        graphics2D.fillRect(0, 0,gamePanel.screenWidth, gamePanel.screenHeight);
+
+        int x, y;
+        String text;
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 110f));
+
+        //Shadow
+        text = "Game Over";
+        graphics2D.setColor(Color.BLACK);
+        x = getXForCenterText(text, graphics2D);
+        y = gamePanel.tileSize * 4;
+        graphics2D.drawString(text, x, y);
+
+        //Main
+        graphics2D.setColor(Color.WHITE);
+        graphics2D.drawString(text, x-4, y-4);
+
+        //Retry
+        text = "Retry";
+        graphics2D.setFont(graphics2D.getFont().deriveFont(40f));
+        x = getXForCenterText(text, graphics2D);
+        y += gamePanel.tileSize*4;
+        graphics2D.drawString(text, x, y);
+        if (commandNum == 0){
+            graphics2D.drawString(">", x-40, y);
+        }
+
+        //Back to title screen
+        text = "Quit";
+        graphics2D.setFont(graphics2D.getFont().deriveFont(40f));
+        x = getXForCenterText(text, graphics2D);
+        y += gamePanel.tileSize + 10;
+        graphics2D.drawString(text, x, y);
+        if (commandNum == 1){
+            graphics2D.drawString(">", x-40, y);
+        }
+
+    }
     public void drawFinishedScreen(Graphics2D graphics2D){
         graphics2D.setFont(arial40);
         graphics2D.setColor(Color.yellow);
@@ -78,6 +127,8 @@ public class UI {
     }
 
     public void drawPauseScreen(Graphics2D graphics2D) {
+        graphics2D.setColor(new Color(0, 0, 0, 150));
+        graphics2D.fillRect(0, 0,gamePanel.screenWidth, gamePanel.screenHeight);
         String text = "PAUSED";
         int x, y;
         graphics2D.setFont(arial40);

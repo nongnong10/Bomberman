@@ -256,6 +256,9 @@ public class CollisionChecker {
 
     public boolean checkPlayer(Entity entity) {
         boolean contactPlayer = false;
+        if (gamePanel.player == null){
+            return false;
+        }
         //Entity's solid area position
         entity.solidArea.x = entity.worldX + entity.solidArea.x;
         entity.solidArea.y = entity.worldY + entity.solidArea.y;
