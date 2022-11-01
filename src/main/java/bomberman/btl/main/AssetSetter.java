@@ -2,6 +2,9 @@ package bomberman.btl.main;
 
 import bomberman.btl.entity.enemy.Ballom;
 import bomberman.btl.object.Door;
+import bomberman.btl.object.item.BombItem;
+import bomberman.btl.object.item.FlameItem;
+import bomberman.btl.object.item.SpeedItem;
 import bomberman.btl.object.item.Wallpass;
 import bomberman.btl.tile.Brick;
 
@@ -22,13 +25,27 @@ public class AssetSetter {
                 if (tmp == 'D') {
                     gamePanel.objects[++numObj] = new Door(this.gamePanel, j, i);
                 }
-                if (tmp == 'W') {
+                //POWER UP
+                if (tmp == 'w') {
                     gamePanel.objects[++numObj] = new Wallpass(this.gamePanel, j, i);
                 }
+                if (tmp == 'b') {
+                    gamePanel.objects[++numObj] = new BombItem(this.gamePanel, j, i);
+                }
+                if (tmp == 'f') {
+                    gamePanel.objects[++numObj] = new FlameItem(this.gamePanel, j, i);
+                }
+                if (tmp == 's') {
+                    gamePanel.objects[++numObj] = new SpeedItem(this.gamePanel, j, i);
+                }
+
+                //ENEMIES
                 if (tmp == '1') {
                     gamePanel.enemies[++numEnemy] = new Ballom(this.gamePanel, j, i);
                 }
-                if (tmp == '*' || tmp == 'D' || tmp == 'W') {
+
+                //BRICK
+                if (tmp == '*' || tmp == 'D' || tmp == 'w' || tmp == 'b' || tmp == 'f' || tmp == 's') {
                     gamePanel.interactiveTiles[++numBrick] = new Brick(this.gamePanel, j, i);
                 }
             }

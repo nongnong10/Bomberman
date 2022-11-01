@@ -16,16 +16,17 @@ public class Player extends Entity {
     public static long timer = 0;
     public boolean wallpass = false;
 
-    //LIFE
-    public int life = 3;
     public BufferedImage dead1, dead2, dead3;
     public int dyingcounter = 0;
 
     //BOMB INFO
-    public int maxBomb = 10;
+    public int maxBomb = 1;
     public int numBomb = maxBomb;
     public int currentBomb = -1;
     public int scale = 1;
+
+    //PLAYER INFO
+    public int life = 3;
     KeyInput keyInput;
 
     public Queue<Integer> bombQueue = new LinkedList<>();
@@ -48,6 +49,8 @@ public class Player extends Entity {
 
         dying = false;
         alive = true;
+
+        speed = 2;
 
         setDefaultValues();
         getPlayerImage();
@@ -171,6 +174,17 @@ public class Player extends Entity {
                     wallpass = true;
                     timer = System.currentTimeMillis();
                     break;
+                case "speedItem":
+                    speed += 2;
+                    break;
+                case "flameItem":
+                    scale += 1;
+                    break;
+                case "bombItem":
+                    maxBomb += 1;
+                    numBomb++;
+                    break;
+
                 case "door":
                     gamePanel.ui.gameFinished = true;
                     break;
