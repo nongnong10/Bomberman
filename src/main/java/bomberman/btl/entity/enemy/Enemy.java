@@ -37,7 +37,6 @@ public class Enemy extends Entity {
         gamePanel.collisionChecker.checkEntity(this, gamePanel.interactiveTiles);
         boolean attackPlayer = gamePanel.collisionChecker.checkPlayer(this);
         if (attackPlayer) {
-            System.out.println("Hit a player!");
             gamePanel.player.dying = true;
         }
 
@@ -138,7 +137,6 @@ public class Enemy extends Entity {
     public void dyingAnimation(Graphics2D graphics2D) {
         dyingcounter++;
         int i = 20;
-        System.out.println(dyingcounter);
         if (dyingcounter <= i) {
             graphics2D.drawImage(dead1, worldX, worldY, null);
         }

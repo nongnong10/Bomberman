@@ -8,18 +8,27 @@ import bomberman.btl.input.KeyInput;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Player extends Entity {
-    //Trang thai Power up
+    //POWER UP
     public static long timer = 0;
     public boolean wallpass = false;
 
-    public int numBomb = 1;
-
+    //LIFE
     public int life = 3;
     public BufferedImage dead1, dead2, dead3;
     public int dyingcounter = 0;
+
+    //BOMB INFO
+    public int maxBomb = 10;
+    public int numBomb = maxBomb;
+    public int currentBomb = -1;
+    public int scale = 1;
     KeyInput keyInput;
+
+    public Queue<Integer> bombQueue = new LinkedList<>();
 
     public Player(GamePanel gamePanel, KeyInput keyInput) {
         super(gamePanel);
@@ -69,7 +78,7 @@ public class Player extends Entity {
     }
 
     public void update() {
-        if (keyInput.upPressed || keyInput.downPressed || keyInput.leftPressed || keyInput.rightPressed || keyInput.bombPressed) {
+        if (keyInput.upPressed || keyInput.downPressed || keyInput.leftPressed || keyInput.rightPressed) {
             if (keyInput.upPressed) {
                 direction = "up";
             } else if (keyInput.downPressed) {
@@ -78,9 +87,6 @@ public class Player extends Entity {
                 direction = "left";
             } else if (keyInput.rightPressed) {
                 direction = "right";
-            } else if (keyInput.bombPressed) {
-                placeBomb();
-                return;
             }
 
             //check tile collision
@@ -93,7 +99,6 @@ public class Player extends Entity {
 
             //check interactive tile collision
             int tileInd = gamePanel.collisionChecker.checkEntity(this, gamePanel.interactiveTiles);
-//            System.out.println(tileInd);
 
             //check object collision
             int objInd = gamePanel.collisionChecker.checkObject(this, true);
@@ -140,6 +145,7 @@ public class Player extends Entity {
         }
         if (keyInput.bombPressed == true) {
             placeBomb();
+            keyInput.bombPressed = false;
         }
     }
 
@@ -207,9 +213,12 @@ public class Player extends Entity {
             } else {
                 yBomb = nrow * gamePanel.tileSize;
             }
-            //System.out.println(numBomb + " : " + xBomb/ gamePanel.tileSize + " " + ncol/gamePanel.tileSize);
-            gamePanel.bombs[numBomb] = new Bomb(gamePanel, xBomb, yBomb, this, 2);
-            gamePanel.projectiles.add(gamePanel.bombs[numBomb]);
+            currentBomb = (currentBomb + 1) % maxBomb;
+
+            gamePanel.bombs[currentBomb] = new Bomb(gamePanel, xBomb, yBomb, this, scale);
+            gamePanel.projectiles.add(gamePanel.bombs[currentBomb]);
+            bombQueue.add(currentBomb);
+
             numBomb--;
         }
     }
@@ -290,9 +299,7 @@ public class Player extends Entity {
         if (dyingcounter > 3 * i) {
             dying = false;
             alive = false;
-            gamePanel.player = null;
-//            gamePanel.player.worldX = -gamePanel.tileSize;
-//            gamePanel.player.worldY = -gamePanel.tileSize;
+//            gamePanel.player = null;
             gamePanel.gameState = gamePanel.gameoverState;
         }
     }

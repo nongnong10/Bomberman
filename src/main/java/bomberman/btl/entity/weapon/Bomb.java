@@ -39,7 +39,7 @@ public class Bomb extends Projectile {
 
     @Override
     public void setMove() {
-        
+
     }
 
     @Override

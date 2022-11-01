@@ -21,15 +21,17 @@ public class GamePanel extends JPanel implements Runnable {
     public final int originalTileSize = 16; //16*16 tile
     public final int scale = 3;
     public final int tileSize = originalTileSize * scale; //48*48 tile
+    //STATUS
     public final int maxScreenCol = 21;
     public final int maxScreenRow = 11;
     public final int statusCol = maxScreenCol;
     public final int statusWidth = statusCol * tileSize;
     public final int statusRow = 1;
+
+    //SCREEN
     public final int statusHeight = statusRow * tileSize;
     public final int screenWidth = maxScreenCol * tileSize; //21 * 48 = 1008
     public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 52;
-
     //GAME STATE
     public final int titleState = 0;
     public final int playState = 1;
@@ -192,9 +194,11 @@ public class GamePanel extends JPanel implements Runnable {
                         projectiles.get(i).update();
                     }
                     if (projectiles.get(i).alive == false) {
-                        bombs[player.numBomb + 1] = null;
+                        if (projectiles.get(i).name == "bomb") {
+                            bombs[player.bombQueue.poll()] = null;
+                        }
                         if (projectiles.get(i).name == "flame") {
-                            player.numBomb = 1;
+                            player.numBomb++;
                         }
                         projectiles.remove(i);
                     }

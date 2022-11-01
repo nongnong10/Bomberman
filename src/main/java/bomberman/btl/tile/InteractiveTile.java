@@ -39,7 +39,6 @@ public class InteractiveTile extends Entity {
     public void dyingAnimation(Graphics2D graphics2D) {
         dyingcounter++;
         int i = 20;
-        System.out.println(dyingcounter);
         if (dyingcounter <= i) {
             graphics2D.drawImage(dead1, worldX, worldY, null);
         }
