@@ -28,13 +28,16 @@ public class GamePanel extends JPanel implements Runnable {
     public final int statusRow = 1;
     public final int statusHeight = statusRow * tileSize;
     public final int screenWidth = maxScreenCol * tileSize; //21 * 48 = 1008
-    public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 528
+    public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 52;
 
     //GAME STATE
+    public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int finishState = 3;
     public final int gameoverState = 4;
+    public int gameState;
+
     public KeyInput keyInput = new KeyInput(this);
     //set player position
     public Player player = new Player(this, keyInput);
@@ -44,23 +47,24 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker collisionChecker = new CollisionChecker(this);
     //event handler
     public EventHandler eventHandler = new EventHandler(this);
-    //object
+
+    //Entities
     public Entity[] objects = new Entity[20];
     public Entity[] enemies = new Entity[20];
-    public InteractiveTile[] interactiveTiles = new InteractiveTile[maxScreenCol * maxScreenRow];
+    public InteractiveTile[] interactiveTiles = new InteractiveTile[50];
     public Bomb[] bombs = new Bomb[10];
     public Flame[] flames = new Flame[10];
-    //set object
-    public AssetSetter assetSetter = new AssetSetter(this);
-    //UI
-    public UI ui = new UI(this);
-    //Game state
-    public int gameState;
-    public int FPS = 60;
     public ArrayList<Entity> entities = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
     public ArrayList<Flame> flame = new ArrayList<>();
-    //Once start it, it keep program running until you stop it
+
+    //SET OBJECTS AND ENTITES
+    public AssetSetter assetSetter = new AssetSetter(this);
+
+    //UI
+    public UI ui = new UI(this);
+    public int FPS = 60;
+
     Thread gameThread;
 
     public GamePanel() {
@@ -72,7 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
     }
 
-    public void retry(){
+    public void retry() {
         player = new Player(this, keyInput);
         player.setDefaultPlayer();
         assetSetter.setAll();
@@ -83,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
 //        assetSetter.setInteractiveTiles();
 //        assetSetter.setObject();
 //        assetSetter.setEnemy();
-        gameState = playState;
+        gameState = titleState;
     }
 
     public void startGameThread() {
@@ -116,11 +120,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         if (gameState == playState) {
-            if (player != null){
+            if (player != null) {
                 if (player.alive == true && player.dying == false) {
                     player.update();
                 }
-                if (player.alive == false){
+                if (player.alive == false) {
                     player = null;
                 }
             }
@@ -150,7 +154,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == pauseState) {
             //pause = not update
         }
-        if (gameState == gameoverState){
+        if (gameState == gameoverState) {
 
         }
     }
@@ -158,44 +162,46 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
-        //Tile
-        tileManager.draw(graphics2D);
 
-        //Add entity to List
-        if (player != null) {
-            entities.add(player);
-        }
+        if (gameState != titleState) {
+            //Tile
+            tileManager.draw(graphics2D);
 
-        for (int i = 0; i < objects.length; ++i) {
-            if (objects[i] != null) {
-                entities.add(objects[i]);
+            //Add entity to List
+            if (player != null) {
+                entities.add(player);
             }
-        }
 
-        //Add enemies
-        for (int i = 0; i < enemies.length; ++i) {
-            if (enemies[i] != null) {
-                entities.add(enemies[i]);
-            }
-        }
-
-        //Add bomb
-        for (int i = 0; i < projectiles.size(); ++i) {
-            if (projectiles.get(i) != null) {
-                if (projectiles.get(i).alive == true) {
-                    projectiles.get(i).update();
+            for (int i = 0; i < objects.length; ++i) {
+                if (objects[i] != null) {
+                    entities.add(objects[i]);
                 }
-                if (projectiles.get(i).alive == false) {
-                    bombs[player.numBomb + 1] = null;
-                    if (projectiles.get(i).name == "flame") {
-                        player.numBomb = 1;
+            }
+
+            //Add enemies
+            for (int i = 0; i < enemies.length; ++i) {
+                if (enemies[i] != null) {
+                    entities.add(enemies[i]);
+                }
+            }
+
+            //Add bomb
+            for (int i = 0; i < projectiles.size(); ++i) {
+                if (projectiles.get(i) != null) {
+                    if (projectiles.get(i).alive == true) {
+                        projectiles.get(i).update();
                     }
-                    projectiles.remove(i);
+                    if (projectiles.get(i).alive == false) {
+                        bombs[player.numBomb + 1] = null;
+                        if (projectiles.get(i).name == "flame") {
+                            player.numBomb = 1;
+                        }
+                        projectiles.remove(i);
+                    }
                 }
             }
-        }
 
-        //Sort
+            //Sort
 //        Collections.sort(entities, new Comparator<Entity>() {
 //            @Override
 //            public int compare(Entity o1, Entity o2) {
@@ -212,30 +218,30 @@ public class GamePanel extends JPanel implements Runnable {
 //                return res;
 //            }
 //        });
-        //Draw entities
-        for (int i = 0; i < entities.size(); ++i) {
-            entities.get(i).draw(graphics2D);
-        }
-        //Interactive tiles
-        for (int i = 0; i < interactiveTiles.length; ++i) {
-            if (interactiveTiles[i] != null){
-                interactiveTiles[i].draw(graphics2D);
+            //Draw entities
+            for (int i = 0; i < entities.size(); ++i) {
+                entities.get(i).draw(graphics2D);
             }
+            //Interactive tiles
+            for (int i = 0; i < interactiveTiles.length; ++i) {
+                if (interactiveTiles[i] != null) {
+                    interactiveTiles[i].draw(graphics2D);
+                }
+            }
+            for (int i = 0; i < projectiles.size(); ++i) {
+                //System.out.println(i + " : " + projectiles.get(i).name);
+                projectiles.get(i).draw(graphics2D);
+            }
+            for (int i = 0; i < flame.size(); ++i) {
+                //System.out.println(i + " : " + projectiles.get(i).name);
+                flame.get(i).draw(graphics2D);
+            }
+            //Remove
+            entities.clear();
         }
-        for (int i = 0; i < projectiles.size(); ++i) {
-            //System.out.println(i + " : " + projectiles.get(i).name);
-            projectiles.get(i).draw(graphics2D);
-        }
-        for (int i = 0; i < flame.size(); ++i) {
-            //System.out.println(i + " : " + projectiles.get(i).name);
-            flame.get(i).draw(graphics2D);
-        }
-        //Remove
-        entities.clear();
 
         //UI
         ui.draw(graphics2D);
-
         graphics2D.dispose();
     }
 }

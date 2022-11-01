@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e5ca4ca-7fdf-4894-a0c6-1f243cc50594" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/font/MarvelRegular-Dj83.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/font/PixelsplitterBold-ErDW.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/font/PublicPixel-z84yD.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/font/marvel-font.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/font/pixelsplitter-font.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/font/public-pixel-font.zip" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../OOP/.idea/OOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/input/KeyInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/input/KeyInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/AssetSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/AssetSetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/CollisionChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/CollisionChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/GamePanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/UI.java" afterDir="false" />
     </list>
@@ -110,7 +113,7 @@
       <workItem from="1667201199675" duration="2404000" />
       <workItem from="1667206948750" duration="434000" />
       <workItem from="1667218244933" duration="722000" />
-      <workItem from="1667267225272" duration="2609000" />
+      <workItem from="1667267225272" duration="6947000" />
     </task>
     <servers />
   </component>

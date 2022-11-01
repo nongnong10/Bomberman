@@ -20,36 +20,40 @@ public class KeyInput implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        if (gamePanel.gameState == gamePanel.playState) {
+        if (gamePanel.gameState == gamePanel.titleState) {
+            titleKeyState(keyCode);
+        } else if (gamePanel.gameState == gamePanel.playState) {
             playKeyState(keyCode);
         } else if (gamePanel.gameState == gamePanel.pauseState) {
             pauseKeyState(keyCode);
         } else if (gamePanel.gameState == gamePanel.gameoverState) {
             gameOverKeyState(keyCode);
         }
-        switch (keyCode) {
-            case KeyEvent.VK_UP:
-                upPressed = true;
-                break;
-            case KeyEvent.VK_DOWN:
-                downPressed = true;
-                break;
-            case KeyEvent.VK_LEFT:
-                leftPressed = true;
-                break;
-            case KeyEvent.VK_RIGHT:
-                rightPressed = true;
-                break;
-            case KeyEvent.VK_SPACE:
-                bombPressed = true;
-                break;
-            case KeyEvent.VK_P:
-                if (gamePanel.gameState == gamePanel.playState) {
-                    gamePanel.gameState = gamePanel.pauseState;
-                } else if (gamePanel.gameState == gamePanel.pauseState) {
-                    gamePanel.gameState = gamePanel.playState;
-                }
-                break;
+    }
+
+    public void titleKeyState(int code) {
+        if (code == KeyEvent.VK_UP) {
+            gamePanel.ui.commandNum--;
+            if (gamePanel.ui.commandNum < 0) {
+                gamePanel.ui.commandNum = 2;
+            }
+            upPressed = true;
+        }
+        if (code == KeyEvent.VK_DOWN) {
+            gamePanel.ui.commandNum++;
+            if (gamePanel.ui.commandNum > 2) {
+                gamePanel.ui.commandNum = 0;
+            }
+            downPressed = true;
+        }
+        if (code == KeyEvent.VK_ENTER) {
+            if (gamePanel.ui.commandNum == 0) {
+                gamePanel.gameState = gamePanel.playState;
+            } else if (gamePanel.ui.commandNum == 1) {
+                //later
+            } else if (gamePanel.ui.commandNum == 2) {
+                System.exit(0);
+            }
         }
     }
 
@@ -114,8 +118,9 @@ public class KeyInput implements KeyListener {
             if (gamePanel.ui.commandNum == 0) {
                 gamePanel.gameState = gamePanel.playState;
                 gamePanel.retry();
-            } else {
-//                gamePanel.gameState = gamePanel.playState;
+            }
+            if (gamePanel.ui.commandNum == 1) {
+                gamePanel.gameState = gamePanel.titleState;
             }
         }
     }
@@ -144,5 +149,6 @@ public class KeyInput implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+
     }
 }
