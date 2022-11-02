@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Enemy extends Entity {
+    public BufferedImage dead;
     public BufferedImage dead1 = setupImage("/enemy/mob_dead1");
     public BufferedImage dead2 = setupImage("/enemy/mob_dead2");
     public BufferedImage dead3 = setupImage("/enemy/mob_dead3");
@@ -140,17 +141,20 @@ public class Enemy extends Entity {
 
     public void dyingAnimation(Graphics2D graphics2D) {
         dyingcounter++;
-        int i = 20;
+        int i = 15;
         if (dyingcounter <= i) {
-            graphics2D.drawImage(dead1, worldX, worldY, null);
+            graphics2D.drawImage(dead, worldX, worldY, null);
         }
         if (dyingcounter > i && dyingcounter <= 2 * i) {
-            graphics2D.drawImage(dead2, worldX, worldY, null);
+            graphics2D.drawImage(dead1, worldX, worldY, null);
         }
         if (dyingcounter > 2 * i && dyingcounter <= 3 * i) {
+            graphics2D.drawImage(dead2, worldX, worldY, null);
+        }
+        if (dyingcounter > 3 * i && dyingcounter <= 4 * i) {
             graphics2D.drawImage(dead3, worldX, worldY, null);
         }
-        if (dyingcounter > 3*i){
+        if (dyingcounter > 4*i){
             dying = false;
             alive = false;
         }

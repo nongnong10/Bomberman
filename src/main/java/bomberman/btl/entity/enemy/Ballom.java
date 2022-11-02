@@ -1,6 +1,5 @@
 package bomberman.btl.entity.enemy;
 
-import bomberman.btl.entity.Entity;
 import bomberman.btl.main.GamePanel;
 
 import java.awt.*;
@@ -24,6 +23,7 @@ public class Ballom extends Enemy {
     }
 
     public void getImage() {
+        dead = setupImage("/enemy/ballom/balloom_dead");
         up1 = setupImage("/enemy/ballom/balloom_left1");
         up2 = setupImage("/enemy/ballom/balloom_left2");
         up3 = setupImage("/enemy/ballom/balloom_left3");

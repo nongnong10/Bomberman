@@ -1,6 +1,7 @@
 package bomberman.btl.main;
 
 import bomberman.btl.entity.enemy.Ballom;
+import bomberman.btl.entity.enemy.Oneal;
 import bomberman.btl.object.Door;
 import bomberman.btl.object.item.BombItem;
 import bomberman.btl.object.item.FlameItem;
@@ -58,6 +59,9 @@ public class AssetSetter {
                 //ENEMIES
                 if (tmp == '1') {
                     gamePanel.enemies[++numEnemy] = new Ballom(this.gamePanel, j, i);
+                }
+                if (tmp == '2') {
+                    gamePanel.enemies[++numEnemy] = new Oneal(this.gamePanel, j, i);
                 }
 
                 //BRICK
