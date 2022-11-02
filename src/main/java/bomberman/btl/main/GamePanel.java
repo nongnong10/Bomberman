@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int statusHeight = statusRow * tileSize;
     public final int screenWidth = maxScreenCol * tileSize; //21 * 48 = 1008
     public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 52;
+
     //GAME STATE
     public final int titleState = 0;
     public final int playState = 1;
@@ -40,6 +41,9 @@ public class GamePanel extends JPanel implements Runnable {
     public final int gameoverState = 4;
     public int gameState;
 
+    //LEVEL
+    public int level = 1;
+
     public KeyInput keyInput = new KeyInput(this);
     //set player position
     public Player player = new Player(this, keyInput);
@@ -47,15 +51,17 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileManager = new TileManager(this);
     //collision checker
     public CollisionChecker collisionChecker = new CollisionChecker(this);
-    //event handler
-    public EventHandler eventHandler = new EventHandler(this);
 
     //Entities
-    public Entity[] objects = new Entity[20];
-    public Entity[] enemies = new Entity[20];
-    public InteractiveTile[] interactiveTiles = new InteractiveTile[50];
-    public Bomb[] bombs = new Bomb[10];
-    public Flame[] flames = new Flame[10];
+    public int maxObject = 20;
+    public int maxEnemy = 20;
+    public int maxInteractiveTile = 50;
+    public int maxBomb = 20;
+    public Entity[] objects = new Entity[maxObject];
+    public Entity[] enemies = new Entity[maxEnemy];
+    public InteractiveTile[] interactiveTiles = new InteractiveTile[maxInteractiveTile];
+    public Bomb[] bombs = new Bomb[maxBomb];
+    public int[][] flameTile = new int[maxScreenRow][maxScreenCol];
     public ArrayList<Entity> entities = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
     public ArrayList<Flame> flame = new ArrayList<>();
@@ -81,6 +87,12 @@ public class GamePanel extends JPanel implements Runnable {
     public void retry() {
         player = new Player(this, keyInput);
         player.setDefaultPlayer();
+        assetSetter.setAll();
+    }
+
+    public void newLevel(int lv) {
+        player.setDefaultPlayer();
+        tileManager.loadMap(lv);
         assetSetter.setAll();
     }
 

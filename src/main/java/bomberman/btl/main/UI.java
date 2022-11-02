@@ -17,7 +17,7 @@ public class UI {
     public Font font;
     public BufferedImage wallpassImg;
     public boolean gameFinished = false;
-    public int commandNum = 0;
+    public int commandNum = -1;
     DecimalFormat dformat = new DecimalFormat("#0.00");
 
     public UI(GamePanel gamePanel) {

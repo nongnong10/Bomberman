@@ -24,7 +24,7 @@ public class TileManager {
         mapTile = new char[gamePanel.maxScreenRow][gamePanel.maxScreenCol];
         mapTileNum = new int[gamePanel.maxScreenRow][gamePanel.maxScreenCol];
         getTileImage();
-        loadMap();
+        loadMap(1);
     }
 
     public void getTileImage() {
@@ -45,9 +45,10 @@ public class TileManager {
         }
     }
 
-    public void loadMap() {
+    public void loadMap(int level) {
         try {
-            File myObj = new File("C:\\Users\\HH\\Desktop\\Study\\Code\\btl\\src\\main\\resources\\map\\map3.txt");
+            String l = "C:\\Users\\HH\\Desktop\\Study\\Code\\btl\\src\\main\\resources\\map\\map" + level + ".txt";
+            File myObj = new File(l);
             Scanner myReader = new Scanner(myObj);
             int row = 0;
             while (row < gamePanel.maxScreenRow) {

@@ -20,7 +20,7 @@ public class Player extends Entity {
     public int dyingcounter = 0;
 
     //BOMB INFO
-    public int maxBomb = 1;
+    public int maxBomb = 10;
     public int numBomb = maxBomb;
     public int currentBomb = -1;
     public int scale = 1;
@@ -181,12 +181,13 @@ public class Player extends Entity {
                     scale += 1;
                     break;
                 case "bombItem":
-                    maxBomb += 1;
+                    maxBomb++;
                     numBomb++;
                     break;
 
                 case "door":
-                    gamePanel.ui.gameFinished = true;
+                    gamePanel.level++;
+                    gamePanel.newLevel(gamePanel.level);
                     break;
             }
             gamePanel.objects[index] = null;

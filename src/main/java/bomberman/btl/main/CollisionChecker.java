@@ -256,7 +256,7 @@ public class CollisionChecker {
 
     public boolean checkPlayer(Entity entity) {
         boolean contactPlayer = false;
-        if (gamePanel.player == null){
+        if (gamePanel.player == null) {
             return false;
         }
         //Entity's solid area position
@@ -290,4 +290,35 @@ public class CollisionChecker {
         gamePanel.player.solidArea.y = gamePanel.player.solidAreaDefaultY;
         return contactPlayer;
     }
+
+//    public boolean checkBomb(Entity entity) {
+//        boolean contactBomb = false;
+//        //Entity's solid area position
+//        entity.solidArea.x = entity.worldX + entity.solidArea.x;
+//        entity.solidArea.y = entity.worldY + entity.solidArea.y;
+//
+//        switch (entity.direction) {
+//            case "up":
+//                entity.solidArea.y -= entity.speed;
+//                break;
+//            case "down":
+//                entity.solidArea.y += entity.speed;
+//                break;
+//            case "left":
+//                entity.solidArea.x -= entity.speed;
+//                break;
+//            case "right":
+//                entity.solidArea.x += entity.speed;
+//                break;
+//        }
+//
+//        int nrow = entity.solidArea.y / gamePanel.tileSize;
+//        int ncol = entity.solidArea.x / gamePanel.tileSize;
+//        if (gamePanel.flameTile[nrow][ncol] == 1) {
+//            contactBomb = true;
+//        }
+//        entity.solidArea.x = entity.solidAreaDefaultX;
+//        entity.solidArea.y = entity.solidAreaDefaultY;
+//        return contactBomb;
+//    }
 }

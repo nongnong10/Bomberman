@@ -15,13 +15,29 @@ public class AssetSetter {
         this.gamePanel = gamePanel;
     }
 
-    public void setAll(){
+    public void setAll() {
         int numObj = -1;
         int numEnemy = -1;
         int numBrick = -1;
+        //RESET
+        for (int i = 0; i < gamePanel.maxObject; ++i) {
+            gamePanel.objects[i] = null;
+        }
+        for (int i = 0; i < gamePanel.maxEnemy; ++i) {
+            gamePanel.enemies[i] = null;
+        }
+        for (int i = 0; i < gamePanel.maxInteractiveTile; ++i) {
+            gamePanel.interactiveTiles[i] = null;
+        }
+        for (int i = 0; i < gamePanel.maxBomb; ++i) {
+            gamePanel.bombs[i] = null;
+        }
+
+        //CREATE NEW
         for (int i = 0; i < gamePanel.maxScreenRow; ++i) {
             for (int j = 0; j < gamePanel.maxScreenCol; ++j) {
                 char tmp = gamePanel.tileManager.mapTile[i][j];
+                gamePanel.flameTile[i][j] = 0;
                 if (tmp == 'D') {
                     gamePanel.objects[++numObj] = new Door(this.gamePanel, j, i);
                 }

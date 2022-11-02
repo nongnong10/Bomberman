@@ -49,6 +49,7 @@ public class KeyInput implements KeyListener {
         if (code == KeyEvent.VK_ENTER) {
             if (gamePanel.ui.commandNum == 0) {
                 gamePanel.gameState = gamePanel.playState;
+                gamePanel.ui.commandNum = -1;
             } else if (gamePanel.ui.commandNum == 1) {
                 //later
             } else if (gamePanel.ui.commandNum == 2) {
@@ -116,10 +117,12 @@ public class KeyInput implements KeyListener {
         }
         if (code == KeyEvent.VK_ENTER) {
             if (gamePanel.ui.commandNum == 0) {
+                gamePanel.ui.commandNum = -1;
                 gamePanel.gameState = gamePanel.playState;
                 gamePanel.retry();
             }
             if (gamePanel.ui.commandNum == 1) {
+                gamePanel.ui.commandNum = -1;
                 gamePanel.gameState = gamePanel.titleState;
             }
         }

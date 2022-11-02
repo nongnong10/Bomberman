@@ -39,6 +39,10 @@ public class Enemy extends Entity {
         if (attackPlayer) {
             gamePanel.player.dying = true;
         }
+//        boolean contactBomb = gamePanel.collisionChecker.checkBomb(this);
+//        if (contactBomb){
+//            dying = true;
+//        }
 
         if (collisionOn == false) {
             switch (direction) {

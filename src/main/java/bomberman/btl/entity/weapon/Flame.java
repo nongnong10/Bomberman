@@ -72,6 +72,7 @@ public class Flame extends Projectile {
                 return;
             }
             limit[dir] = i;
+            gamePanel.flameTile[nrow][ncol] = 1;
             this.worldX = nx;
             this.worldY = ny;
 
@@ -97,6 +98,29 @@ public class Flame extends Projectile {
             }
         }
     }
+
+    public void resetFlameTile(int dir) {
+        for (int i = 1; i <= limit[dir]; ++i) {
+            int nx = worldX + i * dirX[dir] * gamePanel.tileSize;
+            int ny = worldY + i * dirY[dir] * gamePanel.tileSize;
+            int nrow = ny / gamePanel.tileSize;
+            int ncol = nx / gamePanel.tileSize;
+            gamePanel.flameTile[nrow][ncol] = 0;
+        }
+    }
+
+//    public void setAction() {
+//        lifeTime++;
+//        System.out.println(lifeTime);
+//        if (lifeTime >= 60) {
+//            alive = false;
+//            lifeTime = 0;
+//
+////            for (int i = 0; i < 4; ++i) {
+////                resetFlameTile(i);
+////            }
+//        }
+//    }
 
     @Override
     public void update() {
