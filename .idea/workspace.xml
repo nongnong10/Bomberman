@@ -5,25 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e5ca4ca-7fdf-4894-a0c6-1f243cc50594" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Oneal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/doll/doll_dead.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/doll/doll_left1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/doll/doll_left2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/doll/doll_left3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/doll/doll_right1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/doll/doll_right2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/doll/doll_right3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/oneal/oneal_dead.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/oneal/oneal_left1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/oneal/oneal_left2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/oneal/oneal_left3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/oneal/oneal_right1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/oneal/oneal_right2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/img/enemy/oneal/oneal_right3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Doll.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Kondoria.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Minvo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Ovapi.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../OOP/.idea/OOP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Ballom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Ballom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Oneal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/entity/enemy/Oneal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/AssetSetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bomberman/btl/main/AssetSetter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/map/map1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/map/map1.txt" afterDir="false" />
     </list>
@@ -129,6 +117,8 @@
       <workItem from="1667358722791" duration="2263000" />
       <workItem from="1667391116998" duration="463000" />
       <workItem from="1667411226278" duration="2202000" />
+      <workItem from="1667449798267" duration="1057000" />
+      <workItem from="1667459679227" duration="610000" />
     </task>
     <servers />
   </component>

@@ -5,8 +5,8 @@ import bomberman.btl.main.GamePanel;
 import java.awt.*;
 import java.util.Random;
 
-public class Oneal extends Enemy{
-    public Oneal(GamePanel gamePanel) {
+public class Doll extends Enemy {
+    public Doll(GamePanel gamePanel) {
         super(gamePanel);
         direction = "down";
         speed = 1;
@@ -14,7 +14,7 @@ public class Oneal extends Enemy{
         getImage();
     }
 
-    public Oneal(GamePanel gamePanel, int col, int row) {
+    public Doll(GamePanel gamePanel, int col, int row) {
         super(gamePanel, col, row);
         direction = "down";
         speed = 1;
@@ -23,19 +23,19 @@ public class Oneal extends Enemy{
     }
 
     public void getImage() {
-        dead = setupImage("/enemy/oneal/oneal_dead");
-        up1 = setupImage("/enemy/oneal/oneal_left1");
-        up2 = setupImage("/enemy/oneal/oneal_left2");
-        up3 = setupImage("/enemy/oneal/oneal_left3");
-        down1 = setupImage("/enemy/oneal/oneal_left1");
-        down2 = setupImage("/enemy/oneal/oneal_left2");
-        down3 = setupImage("/enemy/oneal/oneal_left3");
-        left1 = setupImage("/enemy/oneal/oneal_left1");
-        left2 = setupImage("/enemy/oneal/oneal_left2");
-        left3 = setupImage("/enemy/oneal/oneal_left3");
-        right1 = setupImage("/enemy/oneal/oneal_right1");
-        right2 = setupImage("/enemy/oneal/oneal_right2");
-        right3 = setupImage("/enemy/oneal/oneal_right3");
+        dead = setupImage("/enemy/doll/doll_dead");
+        up1 = setupImage("/enemy/doll/doll_left1");
+        up2 = setupImage("/enemy/doll/doll_left2");
+        up3 = setupImage("/enemy/doll/doll_left3");
+        down1 = setupImage("/enemy/doll/doll_left1");
+        down2 = setupImage("/enemy/doll/doll_left2");
+        down3 = setupImage("/enemy/doll/doll_left3");
+        left1 = setupImage("/enemy/doll/doll_left1");
+        left2 = setupImage("/enemy/doll/doll_left2");
+        left3 = setupImage("/enemy/doll/doll_left3");
+        right1 = setupImage("/enemy/doll/doll_right1");
+        right2 = setupImage("/enemy/doll/doll_right2");
+        right3 = setupImage("/enemy/doll/doll_right3");
     }
 
     @Override
