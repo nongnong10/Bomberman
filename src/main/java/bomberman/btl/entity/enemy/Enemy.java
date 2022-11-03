@@ -29,8 +29,7 @@ public class Enemy extends Entity {
         worldY = row * gamePanel.tileSize;
     }
 
-    @Override
-    public void setMove() {
+    public void checkCollision() {
         collisionOn = false;
         gamePanel.collisionChecker.checkTileEntity(this);
         gamePanel.collisionChecker.checkObject(this, false);
@@ -40,11 +39,16 @@ public class Enemy extends Entity {
         if (attackPlayer) {
             gamePanel.player.dying = true;
         }
+    }
+
+    @Override
+    public void setMove() {
 //        boolean contactBomb = gamePanel.collisionChecker.checkBomb(this);
 //        if (contactBomb){
 //            dying = true;
 //        }
 
+        checkCollision();
         if (collisionOn == false) {
             switch (direction) {
                 case "up":
@@ -82,8 +86,7 @@ public class Enemy extends Entity {
         try {
             if (dying == true) {
                 dyingAnimation(graphics2D);
-            }
-            else{
+            } else {
                 BufferedImage image = null;
                 switch (direction) {
                     case "up":
@@ -154,9 +157,75 @@ public class Enemy extends Entity {
         if (dyingcounter > 3 * i && dyingcounter <= 4 * i) {
             graphics2D.drawImage(dead3, worldX, worldY, null);
         }
-        if (dyingcounter > 4*i){
+        if (dyingcounter > 4 * i) {
             dying = false;
             alive = false;
+        }
+    }
+
+    public void searchPath(int goalCol, int goalRow) {
+        int startCol = (worldX + solidArea.x) / gamePanel.tileSize;
+        int startRow = (worldY + solidArea.y) / gamePanel.tileSize;
+
+        gamePanel.pathFinder.setNodes(startCol, startRow, goalCol, goalRow);
+
+        if (gamePanel.pathFinder.search() == true) {
+            //Next worldX, worldY
+            int nextX = gamePanel.pathFinder.pathList.get(0).col * gamePanel.tileSize;
+            int nextY = gamePanel.pathFinder.pathList.get(0).row * gamePanel.tileSize;
+
+            //Entity's solidArea position
+            int enLeftX = worldX + solidArea.x;
+            int enRightX = worldX + solidArea.x + solidArea.width;
+            int enTopY = worldY + solidArea.y;
+            int enBottomY = worldY + solidArea.y + solidArea.height;
+
+            if (enTopY > nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
+                direction = "up";
+            } else if (enTopY < nextY && enLeftX >= nextX && enRightX < nextX + gamePanel.tileSize) {
+                direction = "down";
+            } else if (enTopY >= nextY && enBottomY < nextY + gamePanel.tileSize) {
+                if (enLeftX > nextX) {
+                    direction = "left";
+                }
+                if (enLeftX < nextX) {
+                    direction = "right";
+                }
+            } else if (enTopY > nextY && enLeftX > nextX) {
+                //up or left
+                direction = "up";
+                checkCollision();
+                if (collisionOn == true) {
+                    direction = "left";
+                }
+            } else if (enTopY > nextY && enLeftX < nextX) {
+                //up or right
+                direction = "up";
+                checkCollision();
+                if (collisionOn == true) {
+                    direction = "right";
+                }
+            } else if (enTopY < nextY && enLeftX > nextX) {
+                //down or left
+                direction = "down";
+                checkCollision();
+                if (collisionOn == true) {
+                    direction = "left";
+                }
+            } else if (enTopY < nextY && enLeftX < nextX) {
+                //down or right
+                direction = "down";
+                checkCollision();
+                if (collisionOn == true) {
+                    direction = "right";
+                }
+            }
+
+            int nextCol = gamePanel.pathFinder.pathList.get(0).col;
+            int nextRow = gamePanel.pathFinder.pathList.get(0).row;
+            if (nextCol == goalCol && nextRow == goalRow) {
+                onPath = false;
+            }
         }
     }
 }

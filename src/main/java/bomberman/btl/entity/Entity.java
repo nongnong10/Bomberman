@@ -31,6 +31,9 @@ public class Entity {
 
     public String direction = "down";
 
+    //Path finder
+    public boolean onPath = false;
+
     public int spriteCounter = 0;
     public int spriteNum = 1;
 
@@ -48,15 +51,15 @@ public class Entity {
         this.gamePanel = gamePanel;
     }
 
-    public void setAction(){
+    public void setAction() {
 
     }
 
-    public void setMove(){
+    public void setMove() {
 
     }
 
-    public void update(){
+    public void update() {
         setAction();
 
         setMove();
@@ -133,9 +136,10 @@ public class Entity {
             image = ImageIO.read(getClass().getResourceAsStream("/img" + imgPath + ".png"));
             image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
 
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return image;
     }
+
 }

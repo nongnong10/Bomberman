@@ -18,6 +18,8 @@ public class TileManager {
 
     public BufferedImage dead1, dead2, dead3;
 
+    public boolean drawPath = false;
+
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         tile = new Tile[50];
@@ -75,6 +77,17 @@ public class TileManager {
                 int x = col * gamePanel.tileSize;
                 int y = row * gamePanel.tileSize;
                 graphics2D.drawImage(tile[mapTileNum[row][col]].image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+            }
+        }
+
+        if (drawPath == true) {
+            graphics2D.setColor(new Color(255, 0, 0, 70));
+            for (int i = 0; i < gamePanel.pathFinder.pathList.size(); ++i) {
+                int worldX = gamePanel.pathFinder.pathList.get(i).col * gamePanel.tileSize;
+                int worldY = gamePanel.pathFinder.pathList.get(i).row * gamePanel.tileSize;
+//                int screenX = worldX - gamePanel.player.worldX;
+//                int screenY = worldY - gamePanel.player.worldY;
+                graphics2D.fillRect(worldX, worldY, gamePanel.tileSize, gamePanel.tileSize);
             }
         }
 

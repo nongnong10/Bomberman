@@ -1,5 +1,6 @@
 package bomberman.btl.main;
 
+import bomberman.btl.ai.PathFinder;
 import bomberman.btl.entity.Entity;
 import bomberman.btl.entity.weapon.Bomb;
 import bomberman.btl.entity.weapon.Flame;
@@ -68,6 +69,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SET OBJECTS AND ENTITES
     public AssetSetter assetSetter = new AssetSetter(this);
+
+    public PathFinder pathFinder = new PathFinder(this);
 
     //UI
     public UI ui = new UI(this);

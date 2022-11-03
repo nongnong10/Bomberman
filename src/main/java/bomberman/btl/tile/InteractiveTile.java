@@ -19,6 +19,8 @@ public class InteractiveTile extends Entity {
         alive = true;
         dying = false;
         collision = true;
+        this.worldX = gamePanel.tileSize * col;
+        this.worldY = gamePanel.tileSize * row;
         solidArea = new Rectangle(0, 0, gamePanel.tileSize, gamePanel.tileSize);
     }
 
