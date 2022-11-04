@@ -79,6 +79,10 @@ public class Enemy extends Entity {
             else if (spriteNum == 3) spriteNum = 1;
             spriteCounter = 0;
         }
+
+        if (shotAvailableCounter < 30) {
+            shotAvailableCounter++;
+        }
     }
 
     @Override

@@ -22,9 +22,6 @@ public class Flame extends Projectile {
 
     public int scale = 1;
 
-    //Chua no
-    public boolean alive;
-
     public Flame(GamePanel gamePanel, int x, int y, Entity user, int scale) {
         super(gamePanel, x, y, user);
         defaultX = x;

@@ -48,6 +48,9 @@ public class Entity {
 
     //Interval for Enemy
     public int actionLockCounter = 0;
+
+    //Shoot counter
+    public int shotAvailableCounter = 0;
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }

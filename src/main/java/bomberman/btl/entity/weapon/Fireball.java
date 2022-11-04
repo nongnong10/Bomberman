@@ -47,17 +47,21 @@ public class Fireball extends Projectile {
                 gamePanel.player.damageEnemy(enemyInd);
                 alive = false;
             }
-            collisionOn = false;
-            boolean contactTile = gamePanel.collisionChecker.checkTileEntity(this);
-            if (contactTile) {
-                alive = false;
-            }
-            int tileInd = gamePanel.collisionChecker.checkEntity(this, gamePanel.interactiveTiles);
-            if (tileInd != 999) {
-                alive = false;
-            }
         } else {
-
+            boolean contactPlayer = gamePanel.collisionChecker.checkPlayer(this);
+            if (contactPlayer) {
+                gamePanel.player.interactEnemy(0);
+                alive = false;
+            }
+        }
+        collisionOn = false;
+        boolean contactTile = gamePanel.collisionChecker.checkTileEntity(this);
+        if (contactTile) {
+            alive = false;
+        }
+        int tileInd = gamePanel.collisionChecker.checkEntity(this, gamePanel.interactiveTiles);
+        if (tileInd != 999) {
+            alive = false;
         }
 
         if (collisionOn == false) {
