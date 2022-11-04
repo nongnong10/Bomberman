@@ -7,6 +7,15 @@ public class Projectile extends Entity {
     public Entity user;
     //Thoi gian cho no
     public int lifeTime;
+    public boolean isShooting;
+
+    public Projectile(GamePanel gamePanel) {
+        super(gamePanel);
+        alive = true;
+        lifeTime = 0;
+        direction = "down";
+    }
+
     public Projectile(GamePanel gamePanel, int x, int y, Entity user) {
         super(gamePanel);
         alive = true;

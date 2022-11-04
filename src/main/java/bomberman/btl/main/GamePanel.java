@@ -3,6 +3,7 @@ package bomberman.btl.main;
 import bomberman.btl.ai.PathFinder;
 import bomberman.btl.entity.Entity;
 import bomberman.btl.entity.weapon.Bomb;
+import bomberman.btl.entity.weapon.Fireball;
 import bomberman.btl.entity.weapon.Flame;
 import bomberman.btl.entity.weapon.Projectile;
 import bomberman.btl.input.KeyInput;
@@ -66,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<Entity> entities = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
     public ArrayList<Flame> flame = new ArrayList<>();
+    public ArrayList<Fireball> fireballs = new ArrayList<>();
 
     //SET OBJECTS AND ENTITES
     public AssetSetter assetSetter = new AssetSetter(this);
@@ -166,6 +168,16 @@ public class GamePanel extends JPanel implements Runnable {
                     }
                 }
             }
+            for (int i = 0; i < fireballs.size(); ++i) {
+                if (fireballs.get(i) != null) {
+                    if (fireballs.get(i).alive == true) {
+                        fireballs.get(i).update();
+                    }
+                    if (fireballs.get(i).alive == false) {
+                        fireballs.remove(i);
+                    }
+                }
+            }
 
         }
         if (gameState == pauseState) {
@@ -249,11 +261,21 @@ public class GamePanel extends JPanel implements Runnable {
             }
             for (int i = 0; i < projectiles.size(); ++i) {
                 //System.out.println(i + " : " + projectiles.get(i).name);
-                projectiles.get(i).draw(graphics2D);
+                if (projectiles.get(i) != null) {
+                    projectiles.get(i).draw(graphics2D);
+                }
             }
             for (int i = 0; i < flame.size(); ++i) {
                 //System.out.println(i + " : " + projectiles.get(i).name);
-                flame.get(i).draw(graphics2D);
+                if (flame.get(i) != null) {
+                    flame.get(i).draw(graphics2D);
+                }
+            }
+            for (int i = 0; i < fireballs.size(); ++i) {
+                //System.out.println(i + " : " + projectiles.get(i).name);
+                if (fireballs.get(i) != null) {
+                    fireballs.get(i).draw(graphics2D);
+                }
             }
             //Remove
             entities.clear();

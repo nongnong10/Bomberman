@@ -1,6 +1,7 @@
 package bomberman.btl.entity;
 
 import bomberman.btl.entity.weapon.Bomb;
+import bomberman.btl.entity.weapon.Fireball;
 import bomberman.btl.entity.weapon.Flame;
 import bomberman.btl.entity.weapon.Projectile;
 import bomberman.btl.main.GamePanel;
@@ -27,9 +28,8 @@ public class Player extends Entity {
 
     //PLAYER INFO
     public int life = 3;
-    KeyInput keyInput;
-
     public Queue<Integer> bombQueue = new LinkedList<>();
+    KeyInput keyInput;
 
     public Player(GamePanel gamePanel, KeyInput keyInput) {
         super(gamePanel);
@@ -60,6 +60,7 @@ public class Player extends Entity {
         this.worldX = gamePanel.tileSize;
         this.worldY = gamePanel.tileSize;
         speed = 4;
+        fireball = new Fireball(this.gamePanel);
     }
 
     public void getPlayerImage() {
@@ -150,9 +151,13 @@ public class Player extends Entity {
             placeBomb();
             keyInput.bombPressed = false;
         }
+        if (keyInput.shootPressed == true && fireball.alive == false) {
+            fireball.set(worldX, worldY, direction, true, this);
+            gamePanel.fireballs.add(fireball);
+        }
     }
 
-    public void setDefaultPlayer(){
+    public void setDefaultPlayer() {
         setDefaultPosition();
     }
 
@@ -162,7 +167,7 @@ public class Player extends Entity {
         direction = "down";
     }
 
-    public void restoreLife(){
+    public void restoreLife() {
         //life = maxLife;
     }
 

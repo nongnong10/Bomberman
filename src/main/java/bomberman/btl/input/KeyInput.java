@@ -12,6 +12,7 @@ public class KeyInput implements KeyListener {
     public boolean leftPressed = false;
     public boolean rightPressed = false;
     public boolean bombPressed = false;
+    public boolean shootPressed = false;
 
     public KeyInput(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -76,6 +77,10 @@ public class KeyInput implements KeyListener {
         }
         if (code == KeyEvent.VK_P) {
             gamePanel.gameState = gamePanel.pauseState;
+        }
+        if (code == KeyEvent.VK_A) {
+            shootPressed = true;
+            System.out.println("Shoot!");
         }
     }
 
@@ -146,6 +151,9 @@ public class KeyInput implements KeyListener {
                 break;
             case KeyEvent.VK_SPACE:
                 bombPressed = false;
+                break;
+            case KeyEvent.VK_A:
+                shootPressed = false;
                 break;
         }
     }

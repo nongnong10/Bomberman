@@ -1,5 +1,7 @@
 package bomberman.btl.entity;
 
+import bomberman.btl.entity.weapon.Fireball;
+import bomberman.btl.entity.weapon.Projectile;
 import bomberman.btl.graphics.UtilityTool;
 import bomberman.btl.main.GamePanel;
 
@@ -30,10 +32,10 @@ public class Entity {
     public UtilityTool utilityTool = new UtilityTool();
 
     public String direction = "down";
+    public Fireball fireball;
 
     //Path finder
     public boolean onPath = false;
-
     public int spriteCounter = 0;
     public int spriteNum = 1;
 
@@ -46,7 +48,6 @@ public class Entity {
 
     //Interval for Enemy
     public int actionLockCounter = 0;
-
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
