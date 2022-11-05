@@ -47,8 +47,10 @@ public class Doll extends Enemy {
                 int goalCol = (gamePanel.player.worldX + gamePanel.player.solidArea.x) / gamePanel.tileSize;
                 int goalRow = (gamePanel.player.worldY + gamePanel.player.solidArea.y) / gamePanel.tileSize;
                 searchPath(goalCol, goalRow);
+                speed = 2;
             }
         } else {
+            speed = 1;
             actionLockCounter++;
             //120 frame = 2s
             if (actionLockCounter >= 60) {

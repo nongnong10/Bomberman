@@ -195,11 +195,9 @@ public class Player extends Entity {
                     maxBomb++;
                     numBomb++;
                     break;
-
                 case "door":
                     gamePanel.playSoundEffect(7);
                     gamePanel.level++;
-                    System.out.println(gamePanel.level);
                     if (gamePanel.level <= gamePanel.maxLevel){
                         gamePanel.newLevel(gamePanel.level);
                     } else {
@@ -334,7 +332,6 @@ public class Player extends Entity {
         if (dyingcounter > 3 * i) {
             dying = false;
             alive = false;
-//            gamePanel.player = null;
             gamePanel.gameState = gamePanel.gameoverState;
         }
     }

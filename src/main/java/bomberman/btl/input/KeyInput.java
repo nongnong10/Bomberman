@@ -1,5 +1,6 @@
 package bomberman.btl.input;
 
+import bomberman.btl.entity.Player;
 import bomberman.btl.main.GamePanel;
 
 import java.awt.event.KeyEvent;
@@ -50,9 +51,14 @@ public class KeyInput implements KeyListener {
         if (code == KeyEvent.VK_ENTER) {
             if (gamePanel.ui.commandNum == 0) {
                 gamePanel.gameState = gamePanel.playState;
+                gamePanel.level = 1;
+                gamePanel.tileManager.loadMap(gamePanel.level);
+                gamePanel.assetSetter.setAll();
                 gamePanel.ui.commandNum = -1;
             } else if (gamePanel.ui.commandNum == 1) {
-                //later
+                gamePanel.gameState = gamePanel.playState;
+                gamePanel.assetSetter.setAll();
+                gamePanel.ui.commandNum = -1;
             } else if (gamePanel.ui.commandNum == 2) {
                 System.exit(0);
             }
@@ -127,6 +133,7 @@ public class KeyInput implements KeyListener {
             }
             if (gamePanel.ui.commandNum == 1) {
                 gamePanel.ui.commandNum = -1;
+                gamePanel.player = new Player(this.gamePanel, this);
                 gamePanel.gameState = gamePanel.titleState;
             }
         }

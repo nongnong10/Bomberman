@@ -16,8 +16,6 @@ import bomberman.btl.tile.TileManager;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
     public static int hasBomb = -1;
@@ -58,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker collisionChecker = new CollisionChecker(this);
 
     //Entities
-    public int maxObject = 20;
+    public int maxObject = 50;
     public int maxEnemy = 20;
     public int maxInteractiveTile = 50;
     public int maxBomb = 20;
@@ -213,6 +211,7 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < objects.length; ++i) {
                 if (objects[i] != null) {
                     objectList.add(objects[i]);
+                    System.out.println(i + " " + objects[i].name);
                 }
             }
 

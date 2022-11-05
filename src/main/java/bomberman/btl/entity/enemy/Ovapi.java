@@ -73,19 +73,6 @@ public class Ovapi extends Enemy {
     @Override
     public void update() {
         super.update();
-
-        if (gamePanel.player != null) {
-            int xDistance = Math.abs(worldX - gamePanel.player.worldX);
-            int yDistance = Math.abs(worldY - gamePanel.player.worldY);
-            int tileDistance = (xDistance + yDistance) / gamePanel.tileSize;
-
-            if (onPath == false && tileDistance < 5) {
-                onPath = true;
-            }
-            if (onPath == true && tileDistance > 10) {
-                onPath = false;
-            }
-        }
         time++;
         if (gamePanel.player != null) {
             int xDistance = Math.abs(worldX - gamePanel.player.worldX);

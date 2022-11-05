@@ -19,6 +19,6 @@ public class Door extends Item {
         super(gamePanel, col, row);
         this.name = "door";
         down1 = setupImage("/object/portal");
-        solidArea = new Rectangle(3, 6, 39, 36);
+        solidArea = new Rectangle(10, 10, 28, 28);
     }
 }

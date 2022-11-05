@@ -8,13 +8,6 @@ public class CollisionChecker {
     public CollisionChecker(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
-
-    /**
-     * Check va cham voi Tile.
-     *
-     * @param entity
-     */
-
     public void checkTilePlayer(Entity entity) {
         int entityLeftWorldX, entityRightWorldX, entityTopWorldY, entityBottomWorldY;
         int entityLeftCol, entityRightCol, entityTopRow, entityBottomRow;
@@ -131,14 +124,6 @@ public class CollisionChecker {
         }
         return contactTile;
     }
-
-    /**
-     * Check va cham voi Object
-     *
-     * @param entity
-     * @param player kiem tra co phai player khong
-     * @return gia tri cua object va cham
-     */
     public int checkObject(Entity entity, boolean player) {
         int index = 999;
 

@@ -85,8 +85,6 @@ public class TileManager {
             for (int i = 0; i < gamePanel.pathFinder.pathList.size(); ++i) {
                 int worldX = gamePanel.pathFinder.pathList.get(i).col * gamePanel.tileSize;
                 int worldY = gamePanel.pathFinder.pathList.get(i).row * gamePanel.tileSize;
-//                int screenX = worldX - gamePanel.player.worldX;
-//                int screenY = worldY - gamePanel.player.worldY;
                 graphics2D.fillRect(worldX, worldY, gamePanel.tileSize, gamePanel.tileSize);
             }
         }

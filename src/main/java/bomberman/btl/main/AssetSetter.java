@@ -37,11 +37,7 @@ public class AssetSetter {
         for (int i = 0; i < gamePanel.maxScreenRow; ++i) {
             for (int j = 0; j < gamePanel.maxScreenCol; ++j) {
                 char tmp = gamePanel.tileManager.mapTile[i][j];
-                gamePanel.flameTile[i][j] = 0;
-                if (tmp == 'D') {
-                    gamePanel.objects[++numObj] = new Door(this.gamePanel, j, i);
-                    System.out.println(numObj + " : " + j  + " " + i);
-                }
+
                 //POWER UP
                 if (tmp == 'w') {
                     gamePanel.objects[++numObj] = new Wallpass(this.gamePanel, j, i);
@@ -54,6 +50,10 @@ public class AssetSetter {
                 }
                 if (tmp == 's') {
                     gamePanel.objects[++numObj] = new SpeedItem(this.gamePanel, j, i);
+                }
+
+                if (tmp == 'D') {
+                    gamePanel.objects[++numObj] = new Door(this.gamePanel, j, i);
                 }
 
                 //ENEMIES
@@ -79,20 +79,6 @@ public class AssetSetter {
                 //BRICK
                 if (tmp == '*' || tmp == 'D' || tmp == 'w' || tmp == 'b' || tmp == 'f' || tmp == 's') {
                     gamePanel.interactiveTiles[++numBrick] = new Brick(this.gamePanel, j, i);
-                }
-            }
-        }
-    }
-
-    public void setObject() {
-        int numObj = -1;
-        for (int i = 0; i < gamePanel.maxScreenRow; ++i) {
-            for (int j = 0; j < gamePanel.maxScreenCol; ++j) {
-                if (gamePanel.tileManager.mapTile[i][j] == 'D') {
-                    gamePanel.objects[++numObj] = new Door(this.gamePanel, j, i);
-                }
-                if (gamePanel.tileManager.mapTile[i][j] == 'W') {
-                    gamePanel.objects[++numObj] = new Wallpass(this.gamePanel, j, i);
                 }
             }
         }
