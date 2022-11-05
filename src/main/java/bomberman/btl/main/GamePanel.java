@@ -2,6 +2,7 @@ package bomberman.btl.main;
 
 import bomberman.btl.ai.PathFinder;
 import bomberman.btl.entity.Entity;
+import bomberman.btl.entity.enemy.Ballom;
 import bomberman.btl.entity.weapon.Bomb;
 import bomberman.btl.entity.weapon.Fireball;
 import bomberman.btl.entity.weapon.Flame;
@@ -65,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Bomb[] bombs = new Bomb[maxBomb];
     public int[][] flameTile = new int[maxScreenRow][maxScreenCol];
     public ArrayList<Entity> entities = new ArrayList<>();
+    public ArrayList<Entity> objectList = new ArrayList<>();
     public ArrayList<Projectile> projectiles = new ArrayList<>();
     public ArrayList<Flame> flame = new ArrayList<>();
     public ArrayList<Fireball> fireballs = new ArrayList<>();
@@ -154,7 +156,12 @@ public class GamePanel extends JPanel implements Runnable {
                         enemies[i].update();
                     }
                     if (enemies[i].alive == false) {
-                        enemies[i] = null;
+                        if (enemies[i].name == "kondoria"){
+                            enemies[i] = new Ballom(this, enemies[i].worldX/tileSize, enemies[i].worldY/tileSize);
+                        } else {
+                            enemies[i] = null;
+                        }
+
                     }
                 }
             }
@@ -203,7 +210,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             for (int i = 0; i < objects.length; ++i) {
                 if (objects[i] != null) {
-                    entities.add(objects[i]);
+                    objectList.add(objects[i]);
                 }
             }
 
@@ -249,15 +256,20 @@ public class GamePanel extends JPanel implements Runnable {
 //                return res;
 //            }
 //        });
-            //Draw entities
-            for (int i = 0; i < entities.size(); ++i) {
-                entities.get(i).draw(graphics2D);
+            for (int i = 0; i < objectList.size(); ++i) {
+                if (objectList.get(i) != null){
+                    objectList.get(i).draw(graphics2D);
+                }
             }
             //Interactive tiles
             for (int i = 0; i < interactiveTiles.length; ++i) {
                 if (interactiveTiles[i] != null) {
                     interactiveTiles[i].draw(graphics2D);
                 }
+            }
+            //Draw entities
+            for (int i = 0; i < entities.size(); ++i) {
+                entities.get(i).draw(graphics2D);
             }
             for (int i = 0; i < projectiles.size(); ++i) {
                 //System.out.println(i + " : " + projectiles.get(i).name);

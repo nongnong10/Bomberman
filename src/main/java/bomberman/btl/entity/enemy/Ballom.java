@@ -9,6 +9,7 @@ public class Ballom extends Enemy {
     public Ballom(GamePanel gamePanel) {
         super(gamePanel);
         direction = "down";
+        name = "ballom";
         speed = 1;
         solidArea = new Rectangle(3, 0, 42, 42);
         getImage();
@@ -17,6 +18,7 @@ public class Ballom extends Enemy {
     public Ballom(GamePanel gamePanel, int col, int row) {
         super(gamePanel, col, row);
         direction = "down";
+        name = "ballom";
         speed = 1;
         solidArea = new Rectangle(3, 0, 42, 42);
         getImage();

@@ -12,6 +12,7 @@ public class Enemy extends Entity {
     public BufferedImage dead2 = setupImage("/enemy/mob_dead2");
     public BufferedImage dead3 = setupImage("/enemy/mob_dead3");
     public int dyingcounter = 0;
+    public boolean isInvisible = false;
 
     public Enemy(GamePanel gamePanel) {
         super(gamePanel);
@@ -43,11 +44,6 @@ public class Enemy extends Entity {
 
     @Override
     public void setMove() {
-//        boolean contactBomb = gamePanel.collisionChecker.checkBomb(this);
-//        if (contactBomb){
-//            dying = true;
-//        }
-
         checkCollision();
         if (collisionOn == false) {
             switch (direction) {
@@ -138,7 +134,9 @@ public class Enemy extends Entity {
                         }
                         break;
                 }
-                graphics2D.drawImage(image, worldX, worldY, null);
+                if (isInvisible == false){
+                    graphics2D.drawImage(image, worldX, worldY, null);
+                }
             }
         } catch (NullPointerException e) {
             e.printStackTrace();

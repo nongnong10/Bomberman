@@ -9,6 +9,7 @@ public class Doll extends Enemy {
     public Doll(GamePanel gamePanel) {
         super(gamePanel);
         direction = "down";
+        name = "doll";
         speed = 1;
         solidArea = new Rectangle(3, 3, 42, 45);
         getImage();
@@ -17,6 +18,7 @@ public class Doll extends Enemy {
     public Doll(GamePanel gamePanel, int col, int row) {
         super(gamePanel, col, row);
         direction = "down";
+        name = "doll";
         speed = 1;
         solidArea = new Rectangle(3, 3, 42, 45);
         getImage();

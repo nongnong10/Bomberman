@@ -9,6 +9,7 @@ public class Kondoria extends Enemy {
     public Kondoria(GamePanel gamePanel) {
         super(gamePanel);
         direction = "down";
+        name = "kondoria";
         speed = 1;
         solidArea = new Rectangle(3, 3, 42, 45);
         getImage();
@@ -16,7 +17,9 @@ public class Kondoria extends Enemy {
 
     public Kondoria(GamePanel gamePanel, int col, int row) {
         super(gamePanel, col, row);
+        System.out.println(worldX + " " +worldY);
         direction = "down";
+        name = "kondoria";
         speed = 1;
         solidArea = new Rectangle(3, 3, 42, 45);
         getImage();
@@ -38,10 +41,36 @@ public class Kondoria extends Enemy {
         right3 = setupImage("/enemy/kondoria/kondoria_right3");
     }
 
+    public void setMove() {
+        collisionOn = false;
+        gamePanel.collisionChecker.checkEntity(this, gamePanel.bombs);
+        gamePanel.collisionChecker.checkDefaultTile(this);
+        boolean attackPlayer = gamePanel.collisionChecker.checkPlayer(this);
+        if (attackPlayer) {
+            gamePanel.player.dying = true;
+        }
+        if (collisionOn == false) {
+            switch (direction) {
+                case "up":
+                    worldY -= speed;
+                    break;
+                case "down":
+                    worldY += speed;
+                    break;
+                case "left":
+                    worldX -= speed;
+                    break;
+                case "right":
+                    worldX += speed;
+                    break;
+            }
+        }
+    }
+
     @Override
     public void setAction() {
         if (onPath) {
-            if (gamePanel.player != null){
+            if (gamePanel.player != null) {
                 int goalCol = (gamePanel.player.worldX + gamePanel.player.solidArea.x) / gamePanel.tileSize;
                 int goalRow = (gamePanel.player.worldY + gamePanel.player.solidArea.y) / gamePanel.tileSize;
                 searchPath(goalCol, goalRow);
@@ -49,28 +78,33 @@ public class Kondoria extends Enemy {
         } else {
             actionLockCounter++;
             //120 frame = 2s
-            if (actionLockCounter >= 60) {
-                Random random = new Random();
-                int i = random.nextInt(100) + 1; //random from 1 to 100;
-                if (i <= 25) {
-                    direction = "up";
-                } else if (i > 25 && i <= 50) {
-                    direction = "down";
-                } else if (i > 50 && i <= 75) {
-                    direction = "left";
-                } else {
-                    direction = "right";
+            //if (actionLockCounter >= 60) {
+                //System.out.println(worldX + " " + worldY);
+                if (worldX % gamePanel.tileSize == 0 && worldY % gamePanel.tileSize == 0) {
+                    Random random = new Random();
+                    int i = random.nextInt(100) + 1; //random from 1 to 100;
+                    if (i <= 25) {
+                        direction = "up";
+                    } else if (i > 25 && i <= 50) {
+                        direction = "down";
+                    } else if (i > 50 && i <= 75) {
+                        direction = "left";
+                    } else {
+                        direction = "right";
+                    }
                 }
+
                 actionLockCounter = 0;
-            }
+            //}
         }
     }
 
     @Override
     public void update() {
         super.update();
+        //System.out.println(worldX + " " + worldY);
 
-        if (gamePanel.player != null){
+        if (gamePanel.player != null) {
             int xDistance = Math.abs(worldX - gamePanel.player.worldX);
             int yDistance = Math.abs(worldY - gamePanel.player.worldY);
             int tileDistance = (xDistance + yDistance) / gamePanel.tileSize;

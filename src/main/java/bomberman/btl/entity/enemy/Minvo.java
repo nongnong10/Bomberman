@@ -10,6 +10,7 @@ public class Minvo extends Enemy {
     public Minvo(GamePanel gamePanel) {
         super(gamePanel);
         direction = "down";
+        name = "minvo";
         speed = 1;
         solidArea = new Rectangle(3, 3, 42, 45);
         fireball = new Fireball(this.gamePanel);
@@ -19,6 +20,7 @@ public class Minvo extends Enemy {
     public Minvo(GamePanel gamePanel, int col, int row) {
         super(gamePanel, col, row);
         direction = "down";
+        name = "minvo";
         speed = 1;
         solidArea = new Rectangle(3, 3, 42, 45);
         fireball = new Fireball(this.gamePanel);

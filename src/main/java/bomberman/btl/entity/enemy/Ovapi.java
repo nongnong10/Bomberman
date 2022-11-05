@@ -5,10 +5,13 @@ import bomberman.btl.main.GamePanel;
 import java.awt.*;
 import java.util.Random;
 
-public class Ovapi extends Enemy{
+public class Ovapi extends Enemy {
+    public int time = 0;
+
     public Ovapi(GamePanel gamePanel) {
         super(gamePanel);
         direction = "down";
+        name = "ovapi";
         speed = 1;
         solidArea = new Rectangle(3, 3, 42, 45);
         getImage();
@@ -17,6 +20,7 @@ public class Ovapi extends Enemy{
     public Ovapi(GamePanel gamePanel, int col, int row) {
         super(gamePanel, col, row);
         direction = "down";
+        name = "ovapi";
         speed = 1;
         solidArea = new Rectangle(3, 3, 42, 45);
         getImage();
@@ -40,21 +44,74 @@ public class Ovapi extends Enemy{
 
     @Override
     public void setAction() {
-        actionLockCounter++;
-        //120 frame = 2s
-        if (actionLockCounter >= 60){
-            Random random = new Random();
-            int i = random.nextInt(100) + 1; //random from 1 to 100;
-            if (i <= 25) {
-                direction = "up";
-            } else if (i > 25 && i <= 50) {
-                direction = "down";
-            } else if (i > 50 && i <= 75) {
-                direction = "left";
-            } else {
-                direction = "right";
+        if (onPath) {
+            if (gamePanel.player != null) {
+                int goalCol = (gamePanel.player.worldX + gamePanel.player.solidArea.x) / gamePanel.tileSize;
+                int goalRow = (gamePanel.player.worldY + gamePanel.player.solidArea.y) / gamePanel.tileSize;
+                searchPath(goalCol, goalRow);
             }
-            actionLockCounter = 0;
+        } else {
+            actionLockCounter++;
+            //120 frame = 2s
+            if (actionLockCounter >= 60) {
+                Random random = new Random();
+                int i = random.nextInt(100) + 1; //random from 1 to 100;
+                if (i <= 25) {
+                    direction = "up";
+                } else if (i > 25 && i <= 50) {
+                    direction = "down";
+                } else if (i > 50 && i <= 75) {
+                    direction = "left";
+                } else {
+                    direction = "right";
+                }
+                actionLockCounter = 0;
+            }
+        }
+    }
+
+    @Override
+    public void update() {
+        super.update();
+
+        if (gamePanel.player != null) {
+            int xDistance = Math.abs(worldX - gamePanel.player.worldX);
+            int yDistance = Math.abs(worldY - gamePanel.player.worldY);
+            int tileDistance = (xDistance + yDistance) / gamePanel.tileSize;
+
+            if (onPath == false && tileDistance < 5) {
+                onPath = true;
+            }
+            if (onPath == true && tileDistance > 10) {
+                onPath = false;
+            }
+        }
+        time++;
+        if (gamePanel.player != null) {
+            int xDistance = Math.abs(worldX - gamePanel.player.worldX);
+            int yDistance = Math.abs(worldY - gamePanel.player.worldY);
+            int tileDistance = (xDistance + yDistance) / gamePanel.tileSize;
+
+            if (tileDistance < 7) {
+                if (time <= 30) {
+                    onPath = true;
+                    speed = 4;
+                } else {
+                    time %= 60;
+                    onPath = false;
+                    speed = 1;
+                }
+            } else {
+                onPath = false;
+            }
+
+        }
+
+        int i = new Random().nextInt(100) + 1;
+        if (i > 60) {
+            isInvisible = true;
+        } else {
+            isInvisible = false;
         }
     }
 }
