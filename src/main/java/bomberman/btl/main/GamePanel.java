@@ -9,6 +9,7 @@ import bomberman.btl.entity.weapon.Flame;
 import bomberman.btl.entity.weapon.Projectile;
 import bomberman.btl.input.KeyInput;
 import bomberman.btl.entity.Player;
+import bomberman.btl.sound.Sound;
 import bomberman.btl.tile.InteractiveTile;
 import bomberman.btl.tile.TileManager;
 
@@ -30,10 +31,9 @@ public class GamePanel extends JPanel implements Runnable {
     public final int statusCol = maxScreenCol;
     public final int statusWidth = statusCol * tileSize;
     public final int statusRow = 1;
-
+    public final int screenWidth = maxScreenCol * tileSize; //21 * 48 = 1008
     //SCREEN
     public final int statusHeight = statusRow * tileSize;
-    public final int screenWidth = maxScreenCol * tileSize; //21 * 48 = 1008
     public final int screenHeight = maxScreenRow * tileSize + statusRow * tileSize; //11 * 48 = 52;
 
     //GAME STATE
@@ -43,6 +43,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int finishState = 3;
     public final int gameoverState = 4;
     public int gameState;
+
+    public int maxLevel = 5;
 
     //LEVEL
     public int level = 1;
@@ -80,6 +82,9 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public int FPS = 60;
 
+    //Sound
+    public Sound sound = new Sound();
+
     Thread gameThread;
 
     public GamePanel() {
@@ -105,9 +110,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         assetSetter.setAll();
-//        assetSetter.setInteractiveTiles();
-//        assetSetter.setObject();
-//        assetSetter.setEnemy();
+        playMusic(1);
         gameState = titleState;
     }
 
@@ -156,12 +159,11 @@ public class GamePanel extends JPanel implements Runnable {
                         enemies[i].update();
                     }
                     if (enemies[i].alive == false) {
-                        if (enemies[i].name == "kondoria"){
-                            enemies[i] = new Ballom(this, enemies[i].worldX/tileSize, enemies[i].worldY/tileSize);
+                        if (enemies[i].name == "kondoria") {
+                            enemies[i] = new Ballom(this, enemies[i].worldX / tileSize, enemies[i].worldY / tileSize);
                         } else {
                             enemies[i] = null;
                         }
-
                     }
                 }
             }
@@ -257,7 +259,7 @@ public class GamePanel extends JPanel implements Runnable {
 //            }
 //        });
             for (int i = 0; i < objectList.size(); ++i) {
-                if (objectList.get(i) != null){
+                if (objectList.get(i) != null) {
                     objectList.get(i).draw(graphics2D);
                 }
             }
@@ -291,10 +293,26 @@ public class GamePanel extends JPanel implements Runnable {
             }
             //Remove
             entities.clear();
+            objectList.clear();
         }
 
         //UI
         ui.draw(graphics2D);
         graphics2D.dispose();
+    }
+
+    public void playMusic(int ind) {
+        sound.setFile(ind);
+        sound.play();
+        sound.loop();
+    }
+
+    public void stopMusic() {
+        sound.stop();
+    }
+
+    public void playSoundEffect(int ind) {
+        sound.setFile(ind);
+        sound.play();
     }
 }

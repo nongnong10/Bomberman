@@ -12,6 +12,7 @@ public class Enemy extends Entity {
     public BufferedImage dead2 = setupImage("/enemy/mob_dead2");
     public BufferedImage dead3 = setupImage("/enemy/mob_dead3");
     public int dyingcounter = 0;
+    public boolean soundCheck = false;
     public boolean isInvisible = false;
 
     public Enemy(GamePanel gamePanel) {
@@ -134,7 +135,7 @@ public class Enemy extends Entity {
                         }
                         break;
                 }
-                if (isInvisible == false){
+                if (isInvisible == false) {
                     graphics2D.drawImage(image, worldX, worldY, null);
                 }
             }
@@ -146,8 +147,12 @@ public class Enemy extends Entity {
 
     public void dyingAnimation(Graphics2D graphics2D) {
         dyingcounter++;
-        int i = 15;
+        int i = 12;
         if (dyingcounter <= i) {
+            if (soundCheck == false) {
+                gamePanel.playSoundEffect(6);
+                soundCheck = true;
+            }
             graphics2D.drawImage(dead, worldX, worldY, null);
         }
         if (dyingcounter > i && dyingcounter <= 2 * i) {

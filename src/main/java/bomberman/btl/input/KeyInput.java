@@ -80,7 +80,6 @@ public class KeyInput implements KeyListener {
         }
         if (code == KeyEvent.VK_A) {
             shootPressed = true;
-            System.out.println("Shoot!");
         }
     }
 

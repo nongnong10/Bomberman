@@ -29,6 +29,8 @@ public class Player extends Entity {
     //PLAYER INFO
     public int life = 3;
     public Queue<Integer> bombQueue = new LinkedList<>();
+
+    public boolean soundCheck = false;
     KeyInput keyInput;
 
     public Player(GamePanel gamePanel, KeyInput keyInput) {
@@ -176,23 +178,33 @@ public class Player extends Entity {
             String objectName = gamePanel.objects[index].name;
             switch (objectName) {
                 case "wallpass":
+                    gamePanel.playSoundEffect(7);
                     wallpass = true;
                     timer = System.currentTimeMillis();
                     break;
                 case "speedItem":
+                    gamePanel.playSoundEffect(7);
                     speed += 2;
                     break;
                 case "flameItem":
+                    gamePanel.playSoundEffect(7);
                     scale += 1;
                     break;
                 case "bombItem":
+                    gamePanel.playSoundEffect(7);
                     maxBomb++;
                     numBomb++;
                     break;
 
                 case "door":
+                    gamePanel.playSoundEffect(7);
                     gamePanel.level++;
-                    gamePanel.newLevel(gamePanel.level);
+                    System.out.println(gamePanel.level);
+                    if (gamePanel.level <= gamePanel.maxLevel){
+                        gamePanel.newLevel(gamePanel.level);
+                    } else {
+                        gamePanel.gameState = gamePanel.gameoverState;
+                    }
                     break;
             }
             gamePanel.objects[index] = null;
@@ -306,8 +318,11 @@ public class Player extends Entity {
     public void dyingAnimation(Graphics2D graphics2D) {
         dyingcounter++;
         int i = 20;
-        System.out.println(dyingcounter);
         if (dyingcounter <= i) {
+            if (soundCheck == false){
+                gamePanel.playSoundEffect(3);
+                soundCheck = true;
+            }
             graphics2D.drawImage(dead1, worldX, worldY, null);
         }
         if (dyingcounter > i && dyingcounter <= 2 * i) {

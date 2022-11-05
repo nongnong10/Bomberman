@@ -40,6 +40,7 @@ public class AssetSetter {
                 gamePanel.flameTile[i][j] = 0;
                 if (tmp == 'D') {
                     gamePanel.objects[++numObj] = new Door(this.gamePanel, j, i);
+                    System.out.println(numObj + " : " + j  + " " + i);
                 }
                 //POWER UP
                 if (tmp == 'w') {
