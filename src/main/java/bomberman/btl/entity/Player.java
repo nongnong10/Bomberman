@@ -160,17 +160,9 @@ public class Player extends Entity {
     }
 
     public void setDefaultPlayer() {
-        setDefaultPosition();
-    }
-
-    public void setDefaultPosition() {
         worldX = gamePanel.tileSize;
         worldY = gamePanel.tileSize;
         direction = "down";
-    }
-
-    public void restoreLife() {
-        //life = maxLife;
     }
 
     public void pickupObject(int index) {

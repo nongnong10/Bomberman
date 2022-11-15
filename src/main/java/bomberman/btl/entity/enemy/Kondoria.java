@@ -17,7 +17,6 @@ public class Kondoria extends Enemy {
 
     public Kondoria(GamePanel gamePanel, int col, int row) {
         super(gamePanel, col, row);
-        System.out.println(worldX + " " +worldY);
         direction = "down";
         name = "kondoria";
         speed = 1;

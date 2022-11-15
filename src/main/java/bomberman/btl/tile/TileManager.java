@@ -15,9 +15,6 @@ public class TileManager {
 
     public char[][] mapTile;
     public int[][] mapTileNum;
-
-    public BufferedImage dead1, dead2, dead3;
-
     public boolean drawPath = false;
 
     public TileManager(GamePanel gamePanel) {

@@ -41,7 +41,6 @@ public class GamePanel extends JPanel implements Runnable {
     public final int finishState = 3;
     public final int gameoverState = 4;
     public int gameState;
-
     public int maxLevel = 5;
 
     //LEVEL
@@ -86,11 +85,9 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
 
     public GamePanel() {
-        //set the size of class (JPanel)
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.addKeyListener(keyInput);
-        //focus on key input
         this.setFocusable(true);
     }
 
@@ -113,7 +110,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void startGameThread() {
-        //pass class GamePanel to gameThread
         gameThread = new Thread(this);
         gameThread.start();
     }
@@ -211,7 +207,6 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < objects.length; ++i) {
                 if (objects[i] != null) {
                     objectList.add(objects[i]);
-                    System.out.println(i + " " + objects[i].name);
                 }
             }
 
@@ -240,23 +235,6 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            //Sort
-//        Collections.sort(entities, new Comparator<Entity>() {
-//            @Override
-//            public int compare(Entity o1, Entity o2) {
-//                int res = 0;
-//                if (o1.name == o2.name) {
-//                    res = Integer.compare(o1.worldY, o2.worldY);
-//                } else {
-//                    if (o1.name == "enemy") {
-//                        res = 1;
-//                    } else {
-//                        res = -1;
-//                    }
-//                }
-//                return res;
-//            }
-//        });
             for (int i = 0; i < objectList.size(); ++i) {
                 if (objectList.get(i) != null) {
                     objectList.get(i).draw(graphics2D);
@@ -304,10 +282,6 @@ public class GamePanel extends JPanel implements Runnable {
         sound.setFile(ind);
         sound.play();
         sound.loop();
-    }
-
-    public void stopMusic() {
-        sound.stop();
     }
 
     public void playSoundEffect(int ind) {

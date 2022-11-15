@@ -1,10 +1,6 @@
 package bomberman.btl.tile;
 
 import bomberman.btl.main.GamePanel;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 public class Brick extends InteractiveTile{
     public Brick(GamePanel gamePanel, int col, int row){
         super(gamePanel, col, row);

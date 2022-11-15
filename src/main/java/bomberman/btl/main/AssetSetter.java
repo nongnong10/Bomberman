@@ -83,27 +83,4 @@ public class AssetSetter {
             }
         }
     }
-
-    public void setEnemy() {
-        int numEnemy = -1;
-        for (int i = 0; i < gamePanel.maxScreenRow; ++i) {
-            for (int j = 0; j < gamePanel.maxScreenCol; ++j) {
-                if (gamePanel.tileManager.mapTile[i][j] == '1') {
-                    gamePanel.enemies[++numEnemy] = new Ballom(this.gamePanel, j, i);
-                }
-            }
-        }
-    }
-
-    public void setInteractiveTiles() {
-        int numBrick = -1;
-        for (int i = 0; i < gamePanel.maxScreenRow; ++i) {
-            for (int j = 0; j < gamePanel.maxScreenCol; ++j) {
-                char tmp = gamePanel.tileManager.mapTile[i][j];
-                if (tmp == '*' || tmp == 'D' || tmp == 'W') {
-                    gamePanel.interactiveTiles[++numBrick] = new Brick(this.gamePanel, j, i);
-                }
-            }
-        }
-    }
 }
